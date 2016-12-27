@@ -10,7 +10,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class QuotesService {
 
-    private url = 'http://localhost:4000/api/v1/quote/random';
+    private url = 'http://localhost:4000/api/v1/quotes/random';
 
     constructor(private http: Http) {
     }
