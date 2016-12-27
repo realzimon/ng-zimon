@@ -1,5 +1,5 @@
 /**
- * Created by DZDomi on 27.12.16.
+ * Component for the main navigation bar.
  */
 
 import { Component } from '@angular/core';
