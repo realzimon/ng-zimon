@@ -7,7 +7,7 @@ import { QuotesService } from "../services/quotes.service";
 
 @Component({
     selector: 'navbar',
-    templateUrl: 'navbar.component.html',
+    templateUrl: 'app/navbar/navbar.component.html',
     host: {
         '(document:keydown)': 'handleKeyboardEvent($event)'
     }
