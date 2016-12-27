@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from "@angular/http";
 
 import { AppComponent }  from './app.component';
-import { NavComponent } from './navbar.component';
+import { NavComponent } from './navbar/navbar.component';
 import { QuotesService } from './services/quotes.service';
 
 @NgModule({

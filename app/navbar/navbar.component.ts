@@ -3,11 +3,11 @@
  */
 
 import { Component } from '@angular/core';
-import { QuotesService } from "./services/quotes.service";
+import { QuotesService } from "../services/quotes.service";
 
 @Component({
     selector: 'navbar',
-    templateUrl: '../templates/navbar.component.html',
+    templateUrl: 'navbar.component.html',
     host: {
         '(document:keydown)': 'handleKeyboardEvent($event)'
     }
