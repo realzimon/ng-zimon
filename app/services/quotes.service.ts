@@ -1,5 +1,5 @@
 /**
- * Created by DZDomi on 27.12.16.
+ * Provides random quotes from the backend's REST interface.
  */
 
 import {Http, Response} from '@angular/http';
@@ -10,7 +10,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class QuotesService {
 
-    private url = 'http://localhost:4000/quotes/random';
+    private url = 'http://localhost:4000/api/v1/quote/random';
 
     constructor(private http: Http) {
     }

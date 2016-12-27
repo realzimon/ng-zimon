@@ -5,7 +5,7 @@ This is Zimon, a simple dashboard for Zivis.
 The repository at hand contains the Angular 2 frontend.
 
 
-## Developer SSetup
+## Developer Setup
 
 ```bash
 git clone git@github.com:realzimon/ng-zimon.git
