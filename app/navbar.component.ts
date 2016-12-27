@@ -8,7 +8,9 @@ import { QuotesService } from "./services/quotes.service";
 @Component({
     selector: 'navbar',
     templateUrl: '../templates/navbar.component.html',
-
+    host: {
+        '(document:keydown)': 'handleKeyboardEvent($event)'
+    }
 })
 export class NavComponent  {
     randomQuote = 'Random Quote';
@@ -19,8 +21,20 @@ export class NavComponent  {
         window.setInterval(() => {
             quoteService.getRandomQuote()
                 .subscribe(quote => this.randomQuote = quote);
-        }, 2000);
+        }, 10000);
         quoteService.getRandomQuote()
             .subscribe(quote => this.randomQuote = quote);
+    }
+
+    loadNewQuote(){
+        this.quoteService.getRandomQuote()
+            .subscribe(quote => this.randomQuote = quote);
+    }
+
+    handleKeyboardEvent(event: KeyboardEvent){
+        //The lowercase letter 'q'
+        if(event.keyCode === 81){
+            this.loadNewQuote();
+        }
     }
 }
