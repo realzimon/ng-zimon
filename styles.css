@@ -1,3 +1,4 @@
-a.brand-logo {
-  margin-left: 5px;
+nav .brand-logo.left {
+  left: 0.5rem;
+  padding: 0;
 }
