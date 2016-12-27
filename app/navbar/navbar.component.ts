@@ -19,11 +19,9 @@ export class NavComponent {
   constructor(private quoteService: QuotesService) {
     window.setInterval(() => this.time = new Date(), 1000);
     window.setInterval(() => {
-      quoteService.getRandomQuote()
-        .subscribe(quote => this.randomQuote = quote);
+      this.loadNewQuote();
     }, 10000);
-    quoteService.getRandomQuote()
-      .subscribe(quote => this.randomQuote = quote);
+    this.loadNewQuote();
   }
 
   loadNewQuote() {
