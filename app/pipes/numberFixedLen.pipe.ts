@@ -12,11 +12,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class NumberFixedLen implements PipeTransform {
   transform(value: number, len: number): string {
     if (isNaN(value) || isNaN(value)) {
-      return ""+value;
+      return '' + value;
     }
-    let num: string = ''+value;
+    let num: string = '' + value;
     while (num.length < len) {
-      num = '0'+num;
+      num = '0' + num;
     }
     return num;
   }
