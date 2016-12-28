@@ -12,7 +12,10 @@ export class ZiviListComponent {
   zivis: Zivi[];
 
   constructor(private ziviService: ZiviService) {
-    this.zivis = ziviService.getAllZivis();
+    ziviService.getAllZivis().subscribe(zivis => {
+      this.zivis = zivis;
+      console.log(this.zivis);
+    });
   }
 
   handleKeyboardEvent(event: KeyboardEvent) {
