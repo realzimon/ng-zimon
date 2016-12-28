@@ -16,5 +16,9 @@ nav .brand-logo.left {
 }
 
 .zivicard {
-  margin: 0.2em;
+  margin: 0.2rem;
+}
+
+.dashboard-container {
+  padding: 1rem;
 }
