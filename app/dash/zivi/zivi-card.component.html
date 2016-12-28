@@ -1,10 +1,9 @@
-<div class="card zivicard box" [ngClass]="zivi.color">
-  <div class="card-content white-text">
-        <span class="card-title">
-          {{ zivi.name }}
-        </span>
-  </div>
-  <div class="card-action">
-    <a href="#">fetzen</a>
-  </div>
+<div class="card" [ngClass]="zivi.color">
+    <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" [src]="zivi.picture" >
+    </div>
+    <div class="card-content" >
+        <span class="card-title activator white-text text-darken-4">{{ zivi.name }}<i class="material-icons right">{{zivi.post_count}}</i></span>
+        <p><a href="#"></a></p>
+    </div>
 </div>
