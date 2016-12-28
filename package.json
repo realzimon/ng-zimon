@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "QuickStart package.json from the documentation, supplemented with testing support",
   "scripts": {
-    "start": "tslint ./app/**/*.ts -t verbose && concurrently \"tsc\" && concurrently \"tsc -w\" \"lite-server\"",
+    "start": "tslint ./app/**/*.ts -t verbose && concurrently \"tsc -w\" \"lite-server\"",
     "e2e": "tsc && concurrently \"http-server -s\" \"protractor protractor.config.js\" --kill-others --success first",
     "lint": "tslint ./app/**/*.ts -t verbose",
     "lite": "lite-server",
