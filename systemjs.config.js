@@ -25,7 +25,8 @@
 
       // other libraries
       'rxjs':                      'npm:rxjs',
-      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
+      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
+      'socket.io-client':          'node_modules/socket.io-client/dist/socket.io.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -35,6 +36,9 @@
       },
       rxjs: {
         defaultExtension: 'js'
+      },
+      'socket.io-client': {
+        'defaultExtension': 'js'
       }
     }
   });
