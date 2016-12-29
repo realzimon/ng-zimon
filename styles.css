@@ -58,6 +58,10 @@ nav .brand-logo.left {
   }
 }
 
+.post-action-spinner {
+  margin-top: 2em;
+}
+
 .dashboard-container {
   padding: 1rem;
 }
