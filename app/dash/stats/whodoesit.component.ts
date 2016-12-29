@@ -20,6 +20,11 @@ export class WhoDoesItStats {
       }]
     }
   };
+
+  public barChartColors: any[] = [
+    {backgroundColor: 'blue', fontColor: 'white'}
+  ];
+
   public barChartLabels:string[] = [];
 
   public barChartData:any[] = [{
@@ -52,15 +57,19 @@ export class WhoDoesItStats {
   }
 
   updateGraph(){
-    this.barChartData = [{
-      data: [],
-      label: 'An erster Stelle'
-    }];
-    this.barChartLabels = [];
+    this.barChartData = [];
+    this.barChartColors = [];
     this.zivis.forEach((zivi) => {
-      this.barChartLabels.push(zivi.name);
-      this.barChartData[0].data.push(zivi.first);
-    })
+      //this.barChartLabels.push(zivi.name);
+      this.barChartData.push({
+        data: [zivi.first],
+        label: zivi.name
+      });
+      this.barChartColors.push({
+        backgroundColor: zivi.colorHex,
+        fontColor: '#ffffff'
+      });
+    });
   }
 
   private randomColorGenerator() {
