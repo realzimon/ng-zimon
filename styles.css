@@ -40,6 +40,22 @@ nav .brand-logo.left {
   margin-top: 0.3em;
   margin-bottom: 0.3em;
   text-align: center;
+  animation: wenns-wirklich-wichtig-is 3s linear infinite;
+}
+
+@keyframes wenns-wirklich-wichtig-is {
+  46% {
+    transform: rotate(0deg);
+  }
+  48% {
+    transform: rotate(-12deg);
+  }
+  52% {
+    transform: rotate(12deg);
+  }
+  54% {
+    transform: rotate(0deg);
+  }
 }
 
 .dashboard-container {
@@ -47,5 +63,5 @@ nav .brand-logo.left {
 }
 
 .huge-icon {
-  font-size: 10em;
+font-size: 10em;
 }
