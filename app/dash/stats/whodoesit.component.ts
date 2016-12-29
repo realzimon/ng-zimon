@@ -13,7 +13,6 @@ export class WhoDoesItStats {
     scales: {
       yAxes: [{
         display: true,
-        stacked: true,
         ticks: {
           min: 0
         }
