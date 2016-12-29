@@ -20,19 +20,16 @@ export class PostlerComponent {
   }
 
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (this.stateInfo.state == PostState.Action) {
-      switch (event.keyCode) {
-        case 79: // 'o'kay
-          this.submitAction('accepted');
-          break;
-        case 78: // 'n'ext
-          this.submitAction('next');
-          break;
-        case 75: // 'k' - no post today
-          this.submitAction('cancel');
-          break;
+    if (this.stateInfo.state === PostState.Preparation) {
+      alert(event.keyCode + " - " + this.stateInfo.state);
+      if (event.keyCode === 79) {
+        this.submitAction('accepted');
+      } else if (event.keyCode === 78) {
+        this.submitAction('next');
+      } else if (event.keyCode === 75) {
+        this.submitAction('cancel');
       }
-    } else if (this.stateInfo.state == PostState.Reminder && event.keyCode === 72) { // 'h'ave returned
+    } else if (this.stateInfo.state === PostState.Reminder && event.keyCode === 72) { // 'h'ave returned
       this.submitAction('dismiss-reminder');
     }
   }
