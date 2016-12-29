@@ -23,6 +23,25 @@ nav .brand-logo.left {
   margin: 0.2rem;
 }
 
+.post-actions {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.post-action-button {
+  width: 100%;
+  padding: 0;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.post-action-icon {
+  width: 100%;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  text-align: center;
+}
+
 .dashboard-container {
   padding: 1rem;
 }

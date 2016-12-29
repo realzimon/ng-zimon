@@ -6,10 +6,28 @@
   </div>
 </div>
 
-<div class="card yellow accent-3 medium white-text" *ngIf="stateInfo.state === states.Preparation">
-  <div class="card-content">
-    <span class="card-title">Postler:</span>
-    <zivicard [zivi]="stateInfo.postler"></zivicard>
+<div class="box" *ngIf="stateInfo.state === states.Preparation">
+  <div class="card yellow accent-3 medium black-text">
+    <div class="card-content">
+      <span class="card-title">Postler:</span>
+      <div class="row">
+        <div class="col-xs-7">
+          <zivicard [zivi]="stateInfo.postler"></zivicard>
+        </div>
+        <div class="col-xs-5 post-actions">
+          <i class="material-icons post-action-icon large">mail</i>
+          <button class="btn waves-effect waves-light post-action-button green">
+            okay
+          </button>
+          <button class="btn waves-effect waves-light post-action-button red">
+            nächster
+          </button>
+          <button class="btn waves-effect waves-light post-action-button orange">
+            keine Post
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
