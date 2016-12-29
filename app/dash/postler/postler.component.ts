@@ -20,19 +20,30 @@ export class PostlerComponent {
   }
 
   handleKeyboardEvent(event: KeyboardEvent) {
-    // The lowercase letter 'p' for post
-    if (event.keyCode === 80) {
-      //todo
+    if (this.stateInfo.state == PostState.Action) {
+      switch (event.keyCode) {
+        case 79: // 'o'kay
+          this.submitAction('accepted');
+          break;
+        case 78: // 'n'ext
+          this.submitAction('next');
+          break;
+        case 75: // 'k' - no post today
+          this.submitAction('cancel');
+          break;
+      }
+    } else if (this.stateInfo.state == PostState.Reminder && event.keyCode === 72) { // 'h'ave returned
+      this.submitAction('dismiss-reminder');
     }
   }
 
-  submitAction(action: string){
+  submitAction(action: string) {
     this.postlerService.sendAction(action).subscribe((data: any) => {
       this.loadPostState();
     });
   }
 
-  loadPostState(){
+  loadPostState() {
     this.postlerService.getCurrentState().subscribe((data: PostlerData) => {
       this.stateInfo = data;
     });
