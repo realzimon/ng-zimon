@@ -11,6 +11,7 @@ import {TimerService} from "../../services/timer.service";
 })
 export class PostlerComponent {
   stateInfo: PostlerData = new PostlerData(PostState.Idle, new Date(), null);
+  states = PostState;
 
   constructor(private postlerService: PostlerService, private timerService: TimerService) {
     timerService.getTimerUpdates().subscribe((data: any) => {

@@ -26,3 +26,7 @@ nav .brand-logo.left {
 .dashboard-container {
   padding: 1rem;
 }
+
+.huge-icon {
+  font-size: 10em;
+}

@@ -1,11 +1,11 @@
-  <div class="card red white-text">
-    <div class="card-content">
-      <span class="card-title">
-        El Posto
-      </span>
-      <span class="card-content">
-        {{stateInfo.state}}
-        {{stateInfo.postler}}
-      </span>
-    </div>
+<div class="card red medium white-text" *ngIf="stateInfo.state === states.Idle">
+  <div class="card-content center-align">
+    <i class="material-icons huge-icon">mail_outline</i>
   </div>
+</div>
+
+<div class="card red medium white-text" *ngIf="stateInfo.state !== states.Idle">
+  <div class="card-content">
+    no está implemento este stato del posto lo siento mucho s&ntilde;or
+  </div>
+</div>
