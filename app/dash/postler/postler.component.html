@@ -6,7 +6,14 @@
   </div>
 </div>
 
-<div class="card red medium white-text" *ngIf="stateInfo.state !== states.Idle">
+<div class="card yellow accent-3 medium white-text" *ngIf="stateInfo.state === states.Preparation">
+  <div class="card-content">
+    <span class="card-title">Postler:</span>
+    <zivicard [zivi]="stateInfo.postler"></zivicard>
+  </div>
+</div>
+
+<div class="card red medium white-text" *ngIf="stateInfo.state === states.Action || stateInfo.state == states.Reminder">
   <div class="card-content">
     no está implemento este stato del posto lo siento mucho s&ntilde;or
   </div>

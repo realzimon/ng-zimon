@@ -13,9 +13,10 @@ export class PostlerComponent {
   stateInfo: PostlerData = new PostlerData(PostState.Idle, new Date(), null);
   states = PostState;
 
-  constructor(private postlerService: PostlerService, private timerService: TimerService) {
-    timerService.getTimerUpdates().subscribe((data: any) => {
-      postlerService.getCurrentState().do(state => this.stateInfo = state);
+  constructor(private postlerService: PostlerService) {
+    postlerService.onStateChange().subscribe((data: PostlerData) => {
+      console.log(data);
+      return this.stateInfo = data;
     });
   }
 

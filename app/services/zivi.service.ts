@@ -30,7 +30,7 @@ export class ZiviService {
   }
 
   static createZiviFromJsonObject(data: any) {
-    if (data === null) {
+    if (!data) {
       return null;
     } else {
       return new Zivi(data.name,
