@@ -32,14 +32,6 @@ export class ZiviService {
   constructor(private http: Http) {
   }
 
-  getAllZivis() {
-    return this.http.get(this.url)
-      .map(res => res.json())
-      .map(res => {
-        return res.zivis.map((zivi: any) => ZiviService.createZiviFromJsonObject(zivi));
-      });
-  }
-
   static createZiviFromJsonObject(data: any) {
     if (data === null) {
       return null;
@@ -53,5 +45,13 @@ export class ZiviService {
         data.first
       );
     }
+  }
+
+  getAllZivis() {
+    return this.http.get(this.url)
+      .map(res => res.json())
+      .map(res => {
+        return res.zivis.map((zivi: any) => ZiviService.createZiviFromJsonObject(zivi));
+      });
   }
 }
