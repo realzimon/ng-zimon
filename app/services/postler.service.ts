@@ -56,4 +56,14 @@ export class PostlerService {
   onStateChange() {
     return this.stateChangeObservable;
   }
+
+  sendAction(action: string){
+    return this.http.put(this.apiUrl, {
+      action: action
+    })
+    //Handle the empty response
+    .map((res) => {
+      res.text() ? res.json() : {}
+    });
+  }
 }

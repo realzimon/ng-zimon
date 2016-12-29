@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {PostState, PostlerData, PostlerService} from '../../services/postler.service';
-import {TimerService} from "../../services/timer.service";
 
 @Component({
   selector: 'postler',
@@ -15,9 +14,9 @@ export class PostlerComponent {
 
   constructor(private postlerService: PostlerService) {
     postlerService.onStateChange().subscribe((data: PostlerData) => {
-      console.log(data);
-      return this.stateInfo = data;
+      this.stateInfo = data;
     });
+    this.loadPostState();
   }
 
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -25,5 +24,17 @@ export class PostlerComponent {
     if (event.keyCode === 80) {
       //todo
     }
+  }
+
+  submitAction(action: string){
+    this.postlerService.sendAction(action).subscribe((data: any) => {
+      this.loadPostState();
+    });
+  }
+
+  loadPostState(){
+    this.postlerService.getCurrentState().subscribe((data: PostlerData) => {
+      this.stateInfo = data;
+    });
   }
 }

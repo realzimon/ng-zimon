@@ -16,13 +16,13 @@
         </div>
         <div class="col-xs-5 post-actions">
           <i class="material-icons post-action-icon large">mail</i>
-          <button class="btn waves-effect waves-light post-action-button green">
+          <button (click)="submitAction('accepted')" class="btn waves-effect waves-light post-action-button green">
             okay
           </button>
-          <button class="btn waves-effect waves-light post-action-button red">
+          <button (click)="submitAction('next')" class="btn waves-effect waves-light post-action-button red">
             nächster
           </button>
-          <button class="btn waves-effect waves-light post-action-button orange">
+          <button (click)="submitAction('cancel')" class="btn waves-effect waves-light post-action-button orange">
             keine Post
           </button>
         </div>
@@ -33,6 +33,6 @@
 
 <div class="card red medium white-text" *ngIf="stateInfo.state === states.Action || stateInfo.state == states.Reminder">
   <div class="card-content">
-    no está implemento este stato del posto lo siento mucho s&ntilde;or
+    no está implemento este stato del posto lo siento mucho s&ntilde;or {{stateInfo.state}}
   </div>
 </div>
