@@ -1,0 +1,70 @@
+import {Component} from '@angular/core';
+import {Zivi, ZiviService} from '../../services/zivi.service';
+import {TimerService} from "../../services/timer.service";
+
+@Component({
+  selector: 'whodoesitstat',
+  templateUrl: 'app/dash/stats/whodoesit.component.html'
+})
+export class WhoDoesItStats {
+
+  public barChartOptions:any = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        display: true,
+        stacked: true,
+        ticks: {
+          min: 0
+        }
+      }]
+    }
+  };
+  public barChartLabels:string[] = [];
+
+  public barChartData:any[] = [{
+    data: [], label: ''
+  }];
+
+  zivis: Zivi[];
+  loadFlag: boolean = false;
+
+  constructor(private ziviService: ZiviService, private timerService: TimerService) {
+    this.loadGraphData();
+    timerService.getTimerUpdates().subscribe((data: any) => {
+      if(this.loadFlag){
+        this.loadFlag = false;
+        this.loadGraphData();
+      }
+      if(data.remaining === 0){
+        this.loadFlag = true;
+      }
+    });
+  }
+  loadGraphData(){
+    this.ziviService.getAllZivis().subscribe(zivis => {
+      zivis.sort((a: Zivi, b: Zivi) => {
+        return a.first < b.first ? 1 : a.first > b.first ? -1 : 0;
+      });
+      this.zivis = zivis;
+      this.updateGraph();
+    });
+  }
+
+  updateGraph(){
+    this.barChartData = [{
+      data: [],
+      label: 'An erster Stelle'
+    }];
+    this.barChartLabels = [];
+    this.zivis.forEach((zivi) => {
+      this.barChartLabels.push(zivi.name);
+      this.barChartData[0].data.push(zivi.first);
+    })
+  }
+
+  private randomColorGenerator() {
+    return '#' + (Math.random().toString(16) + '0000000').slice(2, 8);
+  }
+
+}

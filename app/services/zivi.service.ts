@@ -8,7 +8,12 @@ import {Injectable} from '@angular/core';
 import 'rxjs/Rx';
 
 export class Zivi {
-  constructor(public name: string, public name_mx: string, public post_count: number, public color: string, public picture: string) {
+  constructor(public name: string,
+              public name_mx: string,
+              public post_count: number,
+              public color: string,
+              public picture: string,
+              public first: number) {
 
   }
 
@@ -27,7 +32,7 @@ export class ZiviService {
     }
 
     getZiviByName(name: string) {
-      return new Zivi(name, 'name', 0, 'teal', 'picture');
+      return new Zivi(name, 'name', 0, 'teal', 'picture', 0);
     }
 
     getAllZivis() {
@@ -36,7 +41,12 @@ export class ZiviService {
             .map(res => {
                 let zivis: Zivi[] = [];
                 res.zivis.forEach(function(zivi: any){
-                    zivis.push(new Zivi(zivi.name, zivi.name_mx, zivi.post_count, zivi.color, ZiviService.createPictureUrl(zivi.picture)));
+                    zivis.push(new Zivi(zivi.name,
+                      zivi.name_mx,
+                      zivi.post_count,
+                      zivi.color,
+                      ZiviService.createPictureUrl(zivi.picture),
+                      zivi.first));
                 });
                 return zivis;
             });

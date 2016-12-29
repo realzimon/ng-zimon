@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Zivi, ZiviService} from '../../services/zivi.service';
-import * as io from 'socket.io-client';
+import {TimerService} from "../../services/timer.service";
 
 @Component({
   selector: 'zivilist',
@@ -10,18 +10,15 @@ import * as io from 'socket.io-client';
   }
 })
 export class ZiviListComponent {
-  private socketUrl = "http://localhost:4001";
-  private socket: any;
 
   zivis: Zivi[];
   remainingMins: number;
   remainingSecs: number;
   loadFlag: boolean = false;
 
-  constructor(private ziviService: ZiviService) {
+  constructor(private ziviService: ZiviService, private timerService: TimerService) {
     this.loadZivis();
-    this.socket = io.connect(this.socketUrl);
-    this.socket.on('timer', (data: any) => {
+    timerService.getTimerUpdates().subscribe((data: any) => {
       if(this.loadFlag){
         this.loadFlag = false;
         this.loadZivis();

@@ -7,12 +7,13 @@ import {ZiviService} from './services/zivi.service';
 import {QuotesService} from './services/quotes.service';
 import {AppComponent}  from './app.component';
 import {NavComponent} from './navbar/navbar.component';
+import {TimerService} from "./services/timer.service";
 
 @NgModule({
   imports: [BrowserModule, HttpModule, DashboardModule],
   declarations: [AppComponent, NavComponent],
   bootstrap: [AppComponent],
-  providers: [QuotesService, ZiviService]
+  providers: [QuotesService, ZiviService, TimerService]
 })
 export class AppModule {
 }
