@@ -29,9 +29,6 @@ export class ZiviService {
     return 'http://localhost:4000/images/' + url;
   }
 
-  constructor(private http: Http) {
-  }
-
   static createZiviFromJsonObject(data: any) {
     if (data === null) {
       return null;
@@ -45,6 +42,9 @@ export class ZiviService {
         data.first
       );
     }
+  }
+
+  constructor(private http: Http) {
   }
 
   getAllZivis() {
