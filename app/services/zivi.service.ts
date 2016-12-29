@@ -41,13 +41,17 @@ export class ZiviService {
   }
 
   static createZiviFromJsonObject(data: any) {
-    return new Zivi(data.name,
-      data.name_mx,
-      data.post_count,
-      data.color,
-      data.colorHex,
-      ZiviService.createPictureUrl(data.picture),
-      data.first
-    );
+    if (data === null) {
+      return null;
+    } else {
+      return new Zivi(data.name,
+        data.name_mx,
+        data.post_count,
+        data.color,
+        data.colorHex,
+        ZiviService.createPictureUrl(data.picture),
+        data.first
+      );
+    }
   }
 }
