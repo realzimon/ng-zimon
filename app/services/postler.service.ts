@@ -57,13 +57,13 @@ export class PostlerService {
     return this.stateChangeObservable;
   }
 
-  sendAction(action: string){
+  sendAction(action: string) {
     return this.http.put(this.apiUrl, {
       action: action
     })
-    //Handle the empty response
+    // Handle the empty response
     .map((res) => {
-      res.text() ? res.json() : {}
+      return res.text() ? res.json() : {};
     });
   }
 }
