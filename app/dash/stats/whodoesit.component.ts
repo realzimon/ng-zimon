@@ -14,7 +14,8 @@ export class WhoDoesItStats {
       yAxes: [{
         display: true,
         ticks: {
-          min: 0
+          min: 0,
+          stepSize: 1
         }
       }]
     }
