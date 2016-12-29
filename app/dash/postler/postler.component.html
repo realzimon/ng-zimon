@@ -16,13 +16,16 @@
         </div>
         <div class="col-xs-5 post-actions">
           <i class="material-icons post-action-icon large">mail</i>
-          <button (click)="submitAction('accepted')" class="btn waves-effect waves-light post-action-button green">
+          <button (click)="submitAction('accepted')"
+                  class="btn waves-effect waves-light post-action-button green">
             okay
           </button>
-          <button (click)="submitAction('next')" class="btn waves-effect waves-light post-action-button red">
+          <button (click)="submitAction('next')"
+                  class="btn waves-effect waves-light post-action-button red">
             nächster
           </button>
-          <button (click)="submitAction('cancel')" class="btn waves-effect waves-light post-action-button orange">
+          <button (click)="submitAction('cancel')"
+                  class="btn waves-effect waves-light post-action-button orange">
             keine Post
           </button>
         </div>
@@ -87,7 +90,10 @@
         Karte zurückgelegt?<br/>
       </p>
       <p>(Falschaussage=Zweitgeborenes weg)</p>
-      <button class="btn waves-effect waves-light post-card-button">hab!</button>
+      <button (click)="submitAction('dismiss-reminder')"
+              class="btn waves-effect waves-light post-card-button">
+        hab!
+      </button>
     </div>
   </div>
 </div>
