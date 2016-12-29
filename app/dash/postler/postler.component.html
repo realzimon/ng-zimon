@@ -78,8 +78,16 @@
   </div>
 </div>
 
-<div class="card red medium white-text" *ngIf="stateInfo.state == states.Reminder">
-  <div class="card-content">
-    no está implemento este stato del posto lo siento mucho s&ntilde;or {{stateInfo.state}}
+<div class="card yellow medium black-text" *ngIf="stateInfo.state == states.Reminder">
+  <div class="card-content center-align valign-wrapper full-height">
+    <div class="valign full-width center-align">
+      <i class="material-icons huge-icon post-card-icon">credit_card</i>
+      <p>
+        Wurde die gelbe<br/>
+        Karte zurückgelegt?<br/>
+      </p>
+      <p>(Falschaussage=Zweitgeborenes weg)</p>
+      <button class="btn waves-effect waves-light post-card-button">hab!</button>
+    </div>
   </div>
 </div>

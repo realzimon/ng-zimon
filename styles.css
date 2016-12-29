@@ -66,6 +66,14 @@ nav .brand-logo.left {
   padding: 1rem;
 }
 
+.post-card-icon {
+  animation: wenns-wirklich-wichtig-is 3s linear infinite;
+}
+
+.post-card-button {
+  margin-top: 2em;
+}
+
 .huge-icon {
 font-size: 10em;
 }
