@@ -21,7 +21,6 @@ export class PostlerComponent {
 
   handleKeyboardEvent(event: KeyboardEvent) {
     if (this.stateInfo.state === PostState.Preparation) {
-      alert(event.keyCode + " - " + this.stateInfo.state);
       if (event.keyCode === 79) {
         this.submitAction('accepted');
       } else if (event.keyCode === 78) {
