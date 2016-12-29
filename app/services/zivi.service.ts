@@ -32,25 +32,22 @@ export class ZiviService {
   constructor(private http: Http) {
   }
 
-  getZiviByName(name: string) {
-    return new Zivi(name, 'name', 0, 'teal', '#009688', 'picture', 0);
-  }
-
   getAllZivis() {
     return this.http.get(this.url)
       .map(res => res.json())
       .map(res => {
-        let zivis: Zivi[] = [];
-        res.zivis.forEach(function (zivi: any) {
-          zivis.push(new Zivi(zivi.name,
-            zivi.name_mx,
-            zivi.post_count,
-            zivi.color,
-            zivi.colorHex,
-            ZiviService.createPictureUrl(zivi.picture),
-            zivi.first));
-        });
-        return zivis;
+        return res.zivis.map((zivi: any) => ZiviService.createZiviFromJsonObject(zivi));
       });
+  }
+
+  static createZiviFromJsonObject(data: any) {
+    return new Zivi(data.name,
+      data.name_mx,
+      data.post_count,
+      data.color,
+      data.colorHex,
+      ZiviService.createPictureUrl(data.picture),
+      data.first
+    );
   }
 }
