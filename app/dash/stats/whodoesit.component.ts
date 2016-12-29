@@ -15,14 +15,18 @@ export class WhoDoesItStats {
         display: true,
         ticks: {
           min: 0,
-          stepSize: 1
+          stepSize: 1,
+          fontColor: '#ffffff'
+        },
+        gridLines: {
+          color: 'rgba(255,255,255,0.4)',
+          zeroLineColor: '#ffffff'
         }
       }]
     }
   };
 
   public barChartColors: any[] = [
-    {backgroundColor: 'blue', fontColor: 'white'}
   ];
 
   public barChartLabels:string[] = [];
