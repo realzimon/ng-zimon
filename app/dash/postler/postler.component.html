@@ -31,7 +31,54 @@
   </div>
 </div>
 
-<div class="card red medium white-text" *ngIf="stateInfo.state === states.Action || stateInfo.state == states.Reminder">
+<div class="card red medium white-text" *ngIf="stateInfo.state === states.Action">
+  <div class="card-content center-align valign-wrapper full-height">
+    <div class="valign full-width center-align">
+      <i class="material-icons huge-icon">mail_outline</i>
+      <p>
+        {{stateInfo.postler.name}} macht<br/>
+        die Post...
+      </p>
+      <div class="preloader-wrapper active small post-action-spinner">
+        <div class="spinner-layer spinner-blue">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+        <div class="spinner-layer spinner-yellow">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+        <div class="spinner-layer spinner-green">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card red medium white-text" *ngIf="stateInfo.state == states.Reminder">
   <div class="card-content">
     no está implemento este stato del posto lo siento mucho s&ntilde;or {{stateInfo.state}}
   </div>
