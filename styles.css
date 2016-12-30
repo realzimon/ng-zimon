@@ -81,3 +81,13 @@ font-size: 10em;
 .smaller-font-line-height {
   line-height: 33px !important;
 }
+
+.chart-card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chart-wrapper {
+  flex: 1 1 auto;
+}

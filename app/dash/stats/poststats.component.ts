@@ -7,10 +7,9 @@ import {PostlerService} from "../../services/postler.service";
   templateUrl: 'app/dash/stats/poststats.component.html'
 })
 export class PostStats {
-
-  public pieChartOptions:any = {
+  public pieChartOptions: any = {
     responsive: true,
-    legend: false,
+    maintainAspectRatio: false
   };
 
   public pieChartLabels: string[] = [];
@@ -22,11 +21,11 @@ export class PostStats {
   constructor(private ziviService: ZiviService, private postService: PostlerService) {
     this.loadGraphData();
     postService.onStateChange().subscribe((data: any) => {
-        this.loadGraphData();
+      this.loadGraphData();
     });
   }
 
-  loadGraphData(){
+  loadGraphData() {
     this.ziviService.getAllZivis().subscribe(zivis => {
       zivis.sort((a: Zivi, b: Zivi) => {
         return a.post_count < b.post_count ? 1 : a.post_count > b.post_count ? -1 : 0;
@@ -36,7 +35,7 @@ export class PostStats {
     });
   }
 
-  updateGraph(){
+  updateGraph() {
     this.pieChartData = [];
     this.pieChartLabels = [];
     this.pieChartColors = [];
