@@ -76,8 +76,4 @@ export class WhoDoesItStats {
     });
   }
 
-  private randomColorGenerator() {
-    return '#' + (Math.random().toString(16) + '0000000').slice(2, 8);
-  }
-
 }
