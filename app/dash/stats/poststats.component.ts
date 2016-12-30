@@ -7,14 +7,27 @@ import {PostlerService} from "../../services/postler.service";
   templateUrl: 'app/dash/stats/poststats.component.html'
 })
 export class PostStats {
-  public pieChartOptions: any = {
+  public barChartOptions: any = {
     responsive: true,
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
+    scales: {
+      yAxes: [{
+        display: true,
+        ticks: {
+          min: 0,
+          fontColor: '#ffffff'
+        },
+        gridLines: {
+          color: 'rgba(255,255,255,0.4)',
+          zeroLineColor: '#ffffff'
+        }
+      }]
+    }
   };
 
-  public pieChartLabels: string[] = [];
-  public pieChartData: number[] = [];
-  public pieChartColors: any[] = [];
+  public barChartColors: any[] = [];
+  public barChartLabels: string[] = [];
+  public barChartData: any[] = [{data: [], label: ''}];
 
   zivis: Zivi[];
 
@@ -36,16 +49,17 @@ export class PostStats {
   }
 
   updateGraph() {
-    this.pieChartData = [];
-    this.pieChartLabels = [];
-    this.pieChartColors = [];
-    this.pieChartColors.push({
-      backgroundColor: []
-    });
+    this.barChartData = [];
+    this.barChartColors = [];
     this.zivis.forEach((zivi) => {
-      this.pieChartData.push(zivi.post_count);
-      this.pieChartLabels.push(zivi.name);
-      this.pieChartColors[0].backgroundColor.push(zivi.colorHex);
+      this.barChartData.push({
+        data: [zivi.post_count],
+        label: zivi.name
+      });
+      this.barChartColors.push({
+        backgroundColor: zivi.colorHex,
+        fontColor: '#ffffff'
+      });
     });
   }
 

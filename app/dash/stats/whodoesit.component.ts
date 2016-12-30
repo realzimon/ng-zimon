@@ -7,8 +7,7 @@ import {TimerService} from "../../services/timer.service";
   templateUrl: 'app/dash/stats/whodoesit.component.html'
 })
 export class WhoDoesItStats {
-
-  public barChartOptions:any = {
+  public barChartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
@@ -16,7 +15,6 @@ export class WhoDoesItStats {
         display: true,
         ticks: {
           min: 0,
-          stepSize: 1,
           fontColor: '#ffffff'
         },
         gridLines: {
@@ -27,14 +25,9 @@ export class WhoDoesItStats {
     }
   };
 
-  public barChartColors: any[] = [
-  ];
-
-  public barChartLabels:string[] = [];
-
-  public barChartData:any[] = [{
-    data: [], label: ''
-  }];
+  public barChartColors: any[] = [];
+  public barChartLabels: string[] = [];
+  public barChartData: any[] = [{data: [], label: ''}];
 
   zivis: Zivi[];
   loadFlag: boolean = false;
@@ -42,16 +35,17 @@ export class WhoDoesItStats {
   constructor(private ziviService: ZiviService, private timerService: TimerService) {
     this.loadGraphData();
     timerService.getTimerUpdates().subscribe((data: any) => {
-      if(this.loadFlag){
+      if (this.loadFlag) {
         this.loadFlag = false;
         this.loadGraphData();
       }
-      if(data.remaining === 0){
+      if (data.remaining === 0) {
         this.loadFlag = true;
       }
     });
   }
-  loadGraphData(){
+
+  loadGraphData() {
     this.ziviService.getAllZivis().subscribe(zivis => {
       zivis.sort((a: Zivi, b: Zivi) => {
         return a.first < b.first ? 1 : a.first > b.first ? -1 : 0;
@@ -61,11 +55,10 @@ export class WhoDoesItStats {
     });
   }
 
-  updateGraph(){
+  updateGraph() {
     this.barChartData = [];
     this.barChartColors = [];
     this.zivis.forEach((zivi) => {
-      //this.barChartLabels.push(zivi.name);
       this.barChartData.push({
         data: [zivi.first],
         label: zivi.name

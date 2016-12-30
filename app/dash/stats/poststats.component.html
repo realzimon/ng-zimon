@@ -4,12 +4,12 @@
       <span class="card-title smaller-font-line-height">Wer hat am häufigsten die Post gemacht?</span>
       <div class="chart-wrapper">
         <canvas baseChart
-                [data]="pieChartData"
-                [labels]="pieChartLabels"
-                [options]="pieChartOptions"
-                [colors]="pieChartColors"
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [colors]="barChartColors"
                 [legend]="false"
-                [chartType]="'pie'"></canvas>
+                [chartType]="'bar'"></canvas>
       </div>
     </div>
   </div>
