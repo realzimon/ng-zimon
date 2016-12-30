@@ -10,6 +10,7 @@ export class WhoDoesItStats {
 
   public barChartOptions:any = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       yAxes: [{
         display: true,
