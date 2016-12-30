@@ -77,3 +77,7 @@ nav .brand-logo.left {
 .huge-icon {
 font-size: 10em;
 }
+
+.smaller-font-line-height {
+  line-height: 33px !important;
+}
