@@ -1,9 +1,12 @@
 <nav>
-    <div class="nav-wrapper teal lighten-2">
-        <a href="#" class="brand-logo left">Zimon</a>
-        <ul class="brand-logo center hide-on-med-and-down" (click)="loadNewQuote()">
-            <li><a href="#">{{randomQuote}}</a></li>
-        </ul>
-        <a href="#" class="brand-logo right">{{time.toLocaleTimeString()}}</a>
-    </div>
+  <div class="nav-wrapper teal lighten-2">
+    <a href="#" class="brand-logo left">
+      <img id="zimon-hat" src="/static/zimon-hat.png"/>
+      Zimon
+    </a>
+    <ul class="brand-logo center hide-on-med-and-down" (click)="loadNewQuote()">
+      <li><a href="#">{{randomQuote}}</a></li>
+    </ul>
+    <a href="#" class="brand-logo right">{{time.toLocaleTimeString()}}</a>
+  </div>
 </nav>

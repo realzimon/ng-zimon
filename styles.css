@@ -112,3 +112,8 @@ nav {
   height: 4em;
   line-height: 4em;
 }
+
+img#zimon-hat {
+  height: 0.8em;
+  margin-top: 0.05em;
+}
