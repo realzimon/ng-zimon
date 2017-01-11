@@ -9,12 +9,13 @@ import {AppComponent}  from './app.component';
 import {NavComponent} from './navbar/navbar.component';
 import {TimerService} from "./services/timer.service";
 import {PostlerService} from './services/postler.service';
+import {FladeService} from "./services/flade.service";
 
 @NgModule({
   imports: [BrowserModule, HttpModule, DashboardModule],
   declarations: [AppComponent, NavComponent],
   bootstrap: [AppComponent],
-  providers: [QuotesService, ZiviService, TimerService, PostlerService]
+  providers: [QuotesService, ZiviService, TimerService, PostlerService, FladeService]
 })
 export class AppModule {
 }
