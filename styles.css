@@ -125,3 +125,19 @@ img#zimon-hat {
 .fladetext {
   font-size: 25px;
 }
+
+.card.medium {
+  height: 350px;
+}
+
+.card.small {
+  height: 250px;
+}
+
+feel-the-bern .card {
+  padding: 0.5em;
+}
+
+feel-the-bern .card img {
+  width: 100%;
+}

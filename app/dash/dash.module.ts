@@ -8,11 +8,18 @@ import {ChartsModule} from 'ng2-charts/ng2-charts';
 import {PostlerComponent} from './postler/postler.component';
 import {PostStats} from './stats/poststats.component';
 import {FladeComponent} from './flade/flade.component';
+import {BernieComponent} from './bernie/bernie.component';
 
 @NgModule({
   imports: [BrowserModule, ChartsModule],
-  declarations: [ZiviListComponent, ZiviCardComponent, WhoDoesItStats, NumberFixedLen, PostlerComponent, PostStats, FladeComponent],
-  exports: [ZiviListComponent, WhoDoesItStats, PostlerComponent, PostStats, FladeComponent],
+  declarations: [
+    ZiviListComponent, ZiviCardComponent, WhoDoesItStats, NumberFixedLen,
+    PostlerComponent, PostStats, FladeComponent, BernieComponent
+  ],
+  exports: [
+    ZiviListComponent, WhoDoesItStats, PostlerComponent, PostStats,
+    FladeComponent, BernieComponent
+  ],
   providers: []
 })
 export class DashboardModule {
