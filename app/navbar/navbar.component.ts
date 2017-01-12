@@ -20,7 +20,7 @@ export class NavComponent {
   constructor(private quoteService: QuotesService, private timerService: TimerService) {
     timerService.getTimerUpdates().subscribe((data: any) => {
       this.time = new Date();
-      if (data.remaining % 10 === 0) {
+      if (data.remaining % 30 === 0) {
         this.loadNewQuote();
       }
     });
