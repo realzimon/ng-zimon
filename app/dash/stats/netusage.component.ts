@@ -47,7 +47,7 @@ export class NetUsage {
             ziviService.getAllZivis().subscribe((zivis) => {
                 data.netUsage.forEach((netData: any) => {
                     tempData.push({
-                        data: [Math.round(netData.download / 1000 * 8)],
+                        data: [Math.round(netData.download / 1000)],
                         label: netData.hostname
                     });
                     let worked: boolean = false;
