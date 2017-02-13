@@ -14,7 +14,8 @@ export class Zivi {
               public color: string,
               public colorHex: string,
               public picture: string,
-              public first: number) {
+              public first: number,
+              public addresses: string[]) {
 
   }
 
@@ -39,7 +40,8 @@ export class ZiviService {
         data.color,
         data.colorHex,
         ZiviService.createPictureUrl(data.picture),
-        data.first
+        data.first,
+        data.addresses
       );
     }
   }

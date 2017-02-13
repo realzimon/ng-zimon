@@ -31,23 +31,46 @@ export class NetUsage {
 
     public barChartLabels: string[] = [];
     public barChartColors: any[] = [];
-    public barChartData: any[] = [{data: [], label: ''}];
+    public barChartData: any[] = [
+        {
+            data: [],
+            label: ''
+        }
+    ];
 
     public netUpdate: NetUpdate;
 
-    constructor(private netUsageService: NetUsageService) {
+    constructor(private netUsageService: NetUsageService, private ziviService: ZiviService) {
         this.netUpdate = this.netUsageService.getNetUsageUpdates().subscribe((data: any) => {
-            this.barChartData = [];
-            data.netUsage.forEach((netData: any) => {
-                console.log(netData);
-                this.barChartData.push({
-                    data: [netData.download],
-                    label: netData.hostname
+            let tempData: any[] = [];
+            let tempColor: any[] = [];
+            ziviService.getAllZivis().subscribe((zivis) => {
+                data.netUsage.forEach((netData: any) => {
+                    tempData.push({
+                        data: [Math.round(netData.download / 1000 * 8)],
+                        label: netData.hostname
+                    });
+                    let worked: boolean = false;
+                    zivis.forEach((zivi: any) => {
+                        zivi.addresses.forEach((address: string) => {
+                            if (address === netData.mac) {
+                                tempColor.push({
+                                    backgroundColor: zivi.colorHex,
+                                    fontColor: '#ffffff'
+                                });
+                                worked = true;
+                            }
+                        });
+                    });
+                    if (!worked) {
+                        tempColor.push({
+                            backgroundColor: '#ffffff',
+                            fontColor: '#ffffff'
+                        });
+                    }
                 });
-                this.barChartColors.push({
-                    backgroundColor: '#ffffff',
-                    fontColor: '#ffffff'
-                });
+                this.barChartData = tempData;
+                this.barChartColors = tempColor;
             });
         })
     }
