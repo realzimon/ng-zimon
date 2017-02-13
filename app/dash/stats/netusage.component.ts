@@ -26,7 +26,8 @@ export class NetUsage {
                     zeroLineColor: '#ffffff'
                 }
             }]
-        }
+        },
+        animation: false
     };
 
     public barChartLabels: string[] = [];
