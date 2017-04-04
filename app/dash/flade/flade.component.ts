@@ -7,7 +7,7 @@ import {FladeService, Flade} from '../../services/flade.service';
 })
 export class FladeComponent {
 
-  flade: Flade = new Flade('Flade Of the day', new Date());
+  flade: Flade = new Flade('... laden ...', new Date());
 
   constructor(private fladeService: FladeService) {
     fladeService.getCurrentFlade().subscribe(flade => this.flade = flade);
