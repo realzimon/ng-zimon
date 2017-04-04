@@ -20,10 +20,10 @@ export class FladeService {
   private apiUrl = 'http://localhost:4000/api/v1/flade';
   private socketUrl = 'http://localhost:4001';
   private socket: SocketIOClient.Socket;
-  private stateChangeObservable: Observable<Flade>;
+  private fladeChangeObservable: Observable<Flade>;
 
   constructor(private http: Http) {
-    this.stateChangeObservable = new Observable((observer: any) => {
+    this.fladeChangeObservable = new Observable((observer: any) => {
       this.socket = io.connect(this.socketUrl);
       this.socket.on('flade', () => {
         this.getCurrentFlade().subscribe(flade => observer.next(flade));
@@ -42,4 +42,7 @@ export class FladeService {
       });
   }
 
+  getChangeObservable() {
+    return this.fladeChangeObservable;
+  }
 }
