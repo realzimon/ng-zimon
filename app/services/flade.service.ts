@@ -4,10 +4,8 @@
 
 import {Http} from '@angular/http';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-// import * as io from 'socket.io-client';
-
-// import {Observable} from 'rxjs/Rx';
+import {Observable} from 'rxjs/Rx';
+import * as io from 'socket.io-client';
 
 export class Flade {
   constructor(public text: String, public timestamp: Date) {
