@@ -82,7 +82,7 @@ font-size: 10em;
   font-size: 8em;
 }
 
-.smaller-font-line-height {
+.card-title {
   line-height: 33px !important;
 }
 
@@ -144,4 +144,16 @@ feel-the-bern .card {
 
 feel-the-bern .card img {
   width: 100%;
+}
+
+zivilist zivicard .card {
+  max-width: 200px;
+}
+
+zivilist zivicard img {
+  max-height: 200px;
+}
+
+zivilist .row {
+  justify-content: space-around;
 }
