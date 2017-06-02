@@ -20,6 +20,10 @@
   <script>
       System.import('app').catch(function (err) {
           console.error(err);
+          $('#loading-header').text('El Señor Chefzimon ist unfehlbar');
+          $('#loading-detail').text('Es ist ein Fehler beim Laden aufgetreten.')
+            .after('<blockquote><pre>' + err + '</pre></blockquote>');
+          $('.indeterminate').addClass('red darken-4');
       });
   </script>
 
@@ -34,8 +38,8 @@
   <div class="container full-height">
     <div class="valign-wrapper full-height">
       <div class="valign center-align full-width">
-        <h1 class="orange-text">Lade El Se&ntilde;or Chefzimon</h1>
-        <p>
+        <h1 class="orange-text" id="loading-header">Lade El Se&ntilde;or Chefzimon</h1>
+        <p id="loading-detail">
           Chefzimon ist noch rein dienstlich unterwegs!
         </p>
         <noscript>
