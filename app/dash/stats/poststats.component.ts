@@ -40,9 +40,11 @@ export class PostStats {
 
   loadGraphData() {
     this.ziviService.getAllZivis().subscribe(zivis => {
+      console.info('Loading graph data:', zivis);
       zivis.sort((a: Zivi, b: Zivi) => {
         return a.post_count < b.post_count ? 1 : a.post_count > b.post_count ? -1 : 0;
       });
+      console.info('Sorted graph data:', zivis);
       this.zivis = zivis;
       this.updateGraph();
     });
