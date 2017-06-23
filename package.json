@@ -6,7 +6,7 @@
     "start": "tslint ./app/**/*.ts -t verbose && concurrently \"tsc -w\" \"lite-server\"",
     "lint": "tslint ./app/**/*.ts -t verbose",
     "lite": "lite-server",
-    "prod-server": "tslint ./app/**/*.ts -t verbose && serve .",
+    "prod-server": "tslint ./app/**/*.ts -t verbose && serve --port 3000 .",
     "test": "tsc && concurrently \"tsc -w\" \"karma start karma.conf.js\"",
     "test-once": "tsc && karma start karma.conf.js --single-run",
     "tsc": "tsc",
