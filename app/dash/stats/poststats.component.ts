@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Zivi, ZiviService} from '../../services/zivi.service';
 import {PostlerService} from "../../services/postler.service";
+import {Chart} from 'chart.js';
 
 @Component({
   selector: 'poststats',
@@ -22,12 +23,18 @@ export class PostStats {
           zeroLineColor: '#ffffff'
         }
       }]
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      intersect: false
     }
   };
 
-  public barChartColors: any[] = [];
-  public barChartLabels: string[] = [];
+  public barChartLabels: string[] = [""];
   public barChartData: any[] = [{data: [], label: ''}];
+  private chart: Chart;
 
   zivis: Zivi[];
 
@@ -40,7 +47,6 @@ export class PostStats {
 
   loadGraphData() {
     this.ziviService.getAllZivis().subscribe(zivis => {
-      console.info('Loading graph data:', zivis);
       zivis.sort((a: Zivi, b: Zivi) => {
         return a.post_count < b.post_count ? 1 : a.post_count > b.post_count ? -1 : 0;
       });
@@ -51,18 +57,22 @@ export class PostStats {
   }
 
   updateGraph() {
-    this.barChartData = [];
-    this.barChartColors = [];
-    this.zivis.forEach((zivi) => {
-      this.barChartData.push({
+    this.barChartData = this.zivis.map((zivi) => {
+      return {
         data: [zivi.post_count],
-        label: zivi.name
-      });
-      this.barChartColors.push({
+        label: zivi.name,
         backgroundColor: zivi.colorHex,
         fontColor: '#ffffff'
-      });
+      };
     });
+    this.barChartLabels = this.zivis.map((zivi) => zivi.name);
+    this.chart = new Chart('poststats-canvas', {
+      type: 'bar',
+      data: {
+        labels: [""],
+        datasets: this.barChartData
+      },
+      options: this.barChartOptions
+    })
   }
-
 }
