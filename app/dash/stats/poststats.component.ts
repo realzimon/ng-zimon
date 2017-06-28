@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Zivi, ZiviService} from '../../services/zivi.service';
 import {PostlerService} from "../../services/postler.service";
 import {Chart} from 'chart.js';
@@ -7,8 +7,8 @@ import {Chart} from 'chart.js';
   selector: 'poststats',
   templateUrl: 'app/dash/stats/poststats.component.html'
 })
-export class PostStats {
-  public barChartOptions: any = {
+export class PostStats implements OnInit {
+  public chartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
@@ -32,17 +32,28 @@ export class PostStats {
     }
   };
 
-  public barChartLabels: string[] = [""];
-  public barChartData: any[] = [{data: [], label: ''}];
+  private chartProperties = {
+    type: 'bar',
+    data: {
+      labels: ["Post"],
+      datasets: Array()
+    },
+    options: this.chartOptions
+  };
+
   private chart: Chart;
 
   zivis: Zivi[];
 
   constructor(private ziviService: ZiviService, private postService: PostlerService) {
     this.loadGraphData();
-    postService.onStateChange().subscribe((data: any) => {
+    postService.onStateChange().subscribe(() => {
       this.loadGraphData();
     });
+  }
+
+  ngOnInit() {
+    this.chart = new Chart('poststats-canvas', this.chartProperties);
   }
 
   loadGraphData() {
@@ -50,14 +61,13 @@ export class PostStats {
       zivis.sort((a: Zivi, b: Zivi) => {
         return a.post_count < b.post_count ? 1 : a.post_count > b.post_count ? -1 : 0;
       });
-      console.info('Sorted graph data:', zivis);
       this.zivis = zivis;
       this.updateGraph();
     });
   }
 
   updateGraph() {
-    this.barChartData = this.zivis.map((zivi) => {
+    this.chartProperties.data.datasets = this.zivis.map((zivi) => {
       return {
         data: [zivi.post_count],
         label: zivi.name,
@@ -65,14 +75,6 @@ export class PostStats {
         fontColor: '#ffffff'
       };
     });
-    this.barChartLabels = this.zivis.map((zivi) => zivi.name);
-    this.chart = new Chart('poststats-canvas', {
-      type: 'bar',
-      data: {
-        labels: [""],
-        datasets: this.barChartData
-      },
-      options: this.barChartOptions
-    })
+    this.chart.update();
   }
 }
