@@ -9,17 +9,17 @@ import {PostlerComponent} from './postler/postler.component';
 import {PostStats} from './stats/poststats.component';
 import {FladeComponent} from './flade/flade.component';
 import {BernieComponent} from './bernie/bernie.component';
-import {NetUsage} from './stats/netusage.component';
+import {NetUsageComponent} from './stats/netusage.component';
 
 @NgModule({
   imports: [BrowserModule, ChartsModule],
   declarations: [
     ZiviListComponent, ZiviCardComponent, WhoDoesItStats, NumberFixedLen,
-    PostlerComponent, PostStats, FladeComponent, BernieComponent, NetUsage
+    PostlerComponent, PostStats, FladeComponent, BernieComponent, NetUsageComponent
   ],
   exports: [
     ZiviListComponent, WhoDoesItStats, PostlerComponent, PostStats,
-    FladeComponent, BernieComponent, NetUsage
+    FladeComponent, BernieComponent, NetUsageComponent
   ],
   providers: []
 })

@@ -1,80 +1,152 @@
-/**
- * Created by DZDomi on 10.02.17.
- */
-import {Component} from '@angular/core';
-import {Zivi, ZiviService} from '../../services/zivi.service';
-import {PostlerService} from "../../services/postler.service";
-import {NetUsageService, NetUpdate} from "../../services/netusage.service";
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Chart} from 'chart.js';
+import {NetUsageService, NetUsage} from "../../services/netusage.service";
+
+class UsageDataSet {
+  readonly data: number[];
+  borderColor: string = '#ffffff';
+  label: string;
+  borderWidth: number;
+  readonly pointRadius = 0;
+
+  constructor(readonly mac: string) {
+    this.label = mac;
+    this.data = new Array(20).fill(0);
+  }
+
+  static fromUsage(usage: NetUsage): UsageDataSet {
+    let result = new UsageDataSet(usage.mac);
+    result.updateFromUsage(usage);
+    return result;
+  }
+
+  updateFromUsage(usage: NetUsage) {
+    if (!(usage.mac === this.mac)) {
+      console.error('UsageDataSet', this, 'updated with different mac:', usage);
+    }
+    this.data.shift();
+    this.data.push(Math.ceil(usage.recentDownloadRate / 1000)); //convert bit/s to kbit/s
+    this.computeColorAndWidthFromUsage(usage);
+    this.label = usage.hostname || usage.mac;
+  }
+
+  updateWithNoUsage() {
+    this.data.shift();
+    this.data.push(0);
+  }
+
+  isEmpty(): boolean {
+    for (let dataPoint of this.data) {
+      if (dataPoint !== 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private computeColorAndWidthFromUsage(usage: NetUsage) {
+    if (usage.zivi) {
+      this.borderColor = usage.zivi.colorHex;
+    } else {
+      this.borderColor = '#ffffff';
+      this.borderWidth = 1; //px
+    }
+  }
+}
 
 @Component({
-    selector: 'netusage',
-    templateUrl: 'app/dash/stats/netusage.component.html'
+  selector: 'netusage',
+  templateUrl: 'app/dash/stats/netusage.component.html'
 })
-export class NetUsage {
-    public barChartOptions: any = {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            yAxes: [{
-                display: true,
-                ticks: {
-                    min: 0,
-                    fontColor: '#ffffff'
-                },
-                gridLines: {
-                    color: 'rgba(255,255,255,0.4)',
-                    zeroLineColor: '#ffffff'
-                }
-            }]
+export class NetUsageComponent implements OnInit {
+  private chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      yAxes: [{
+        display: true,
+        ticks: {
+          fontColor: '#ffffff',
+          beginAtZero: true
         },
-        animation: false
-    };
-
-    public barChartLabels: string[] = [];
-    public barChartColors: any[] = [];
-    public barChartData: any[] = [
-        {
-            data: [],
-            label: ''
+        gridLines: {
+          color: 'rgba(255,255,255,0.4)',
+          zeroLineColor: '#ffffff'
         }
-    ];
-
-    public netUpdate: NetUpdate;
-
-    constructor(private netUsageService: NetUsageService, private ziviService: ZiviService) {
-        this.netUpdate = this.netUsageService.getNetUsageUpdates().subscribe((data: any) => {
-            let tempData: any[] = [];
-            let tempColor: any[] = [];
-            ziviService.getAllZivis().subscribe((zivis) => {
-                data.netUsage.forEach((netData: any) => {
-                    tempData.push({
-                        data: [Math.round(netData.download / 1000)],
-                        label: netData.hostname
-                    });
-                    let worked: boolean = false;
-                    zivis.forEach((zivi: any) => {
-                        zivi.addresses.forEach((address: string) => {
-                            if (address === netData.mac) {
-                                tempColor.push({
-                                    backgroundColor: zivi.colorHex,
-                                    fontColor: '#ffffff'
-                                });
-                                worked = true;
-                            }
-                        });
-                    });
-                    if (!worked) {
-                        tempColor.push({
-                            backgroundColor: '#ffffff',
-                            fontColor: '#ffffff'
-                        });
-                    }
-                });
-                this.barChartData = tempData;
-                this.barChartColors = tempColor;
-            });
-        })
+      }],
+      xAxes: [{
+        display: true,
+        ticks: {
+          fontColor: '#ffffff',
+          beginAtZero: true,
+          suggestedMin: 0,
+          suggestedMax: 20,
+          display: false
+        }
+      }]
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      intersect: false
+    },
+    elements: {
+      line: {
+        fill: false,
+        lineTension: 0.1
+      }
     }
+  };
+  private chartDatasets: UsageDataSet[] = [];
+  private chartProperties = {
+    type: 'line',
+    data: {
+      labels: Array(20),
+      datasets: this.chartDatasets
+    },
+    options: this.chartOptions
+  };
 
+  public chart: Chart;
 
+  constructor(private netUsageService: NetUsageService) {
+    this.chartProperties.data.labels.fill("kbit/s");
+    this.netUsageService.getNetUsageUpdates().subscribe((usages: NetUsage[]) => {
+      this.updateGraphFromUsages(usages);
+    });
+  }
+
+  ngOnInit() {
+    this.chart = new Chart('netusage-canvas', this.chartProperties);
+  }
+
+  private updateGraphFromUsages(usages: NetUsage[]) {
+    let macsToUsages = this.mapMacsToUsages(usages);
+    this.chartDatasets.forEach(dataset => {
+      let currentUsage: NetUsage = macsToUsages[dataset.mac];
+      if (currentUsage) {
+        dataset.updateFromUsage(currentUsage);
+        usages.splice(usages.indexOf(currentUsage), 1);
+      } else {
+        dataset.updateWithNoUsage();
+        if (dataset.isEmpty()) {
+          this.chartDatasets.splice(this.chartDatasets.indexOf(dataset), 1);
+        }
+      }
+    });
+    usages.forEach(leftoverUsage => {
+      let dataset = UsageDataSet.fromUsage(leftoverUsage);
+      this.chartDatasets.push(dataset);
+    });
+    this.chart.update();
+  }
+
+  private mapMacsToUsages(usages: NetUsage[]) {
+    let macsToUsages = {};
+    usages.forEach(usage => {
+      macsToUsages[usage.mac] = usage;
+    });
+    return macsToUsages;
+  }
 }
