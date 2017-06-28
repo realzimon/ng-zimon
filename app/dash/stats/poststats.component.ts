@@ -46,7 +46,6 @@ export class PostStats implements OnInit {
   zivis: Zivi[];
 
   constructor(private ziviService: ZiviService, private postService: PostlerService) {
-    this.loadGraphData();
     postService.onStateChange().subscribe(() => {
       this.loadGraphData();
     });
@@ -54,6 +53,7 @@ export class PostStats implements OnInit {
 
   ngOnInit() {
     this.chart = new Chart('poststats-canvas', this.chartProperties);
+    this.loadGraphData();
   }
 
   loadGraphData() {
