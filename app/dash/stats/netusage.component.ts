@@ -67,7 +67,8 @@ export class NetUsageComponent implements OnInit {
         display: true,
         ticks: {
           fontColor: '#ffffff',
-          beginAtZero: true
+          beginAtZero: true,
+          suggestedMax: 1024
         },
         gridLines: {
           color: 'rgba(255,255,255,0.4)',
@@ -79,7 +80,6 @@ export class NetUsageComponent implements OnInit {
         ticks: {
           fontColor: '#ffffff',
           beginAtZero: true,
-          suggestedMin: 0,
           suggestedMax: 20,
           display: false
         }
