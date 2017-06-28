@@ -24,11 +24,13 @@
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
 
       // other libraries
-      'rxjs':                      'npm:rxjs',
+      'rxjs': 'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-      'socket.io-client':          'node_modules/socket.io-client/dist/socket.io.js',
-      'ng2-charts':                'node_modules/ng2-charts/bundles/ng2-charts.umd.min.js',
-      'chart.js':                  'node_modules/chart.js/dist/Chart.js'
+      'socket.io-client': 'npm:socket.io-client',
+      'chart.js': 'npm:chart.js/dist/Chart.js',
+      'ts': 'npm:plugin-typescript',
+      'typescript': 'npm:typescript',
+      'angular2-materialize': 'npm:angular2-materialize'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -40,11 +42,31 @@
         defaultExtension: 'js'
       },
       'socket.io-client': {
-        'defaultExtension': 'js'
+        defaultExtension: 'js',
+        main: 'dist/socket.io.js'
       },
-      'ng2-charts': {
-        'defaultExtension': 'js'
+      'angular2-materialize': {
+        defaultExtension: 'js',
+        main: 'dist/index',
+        format: 'global',
+        meta: {
+          '*.js': {
+            loader: 'ts'
+          }
+        }
+      },
+      ts: {
+        main: 'lib/plugin.js'
+      },
+      typescript: {
+        main: 'lib/typescript.js',
+        meta: {
+          'lib/typescript.js': {
+            exports: 'ts'
+          }
+        }
       }
-    }
+    },
+    transpiler: 'ts'
   });
 })(this);

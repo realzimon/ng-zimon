@@ -6,6 +6,7 @@ import {Http} from '@angular/http';
 import {Injectable} from '@angular/core';
 
 import 'rxjs/Rx';
+import {ENV} from '../config/environment';
 
 export class Zivi {
   constructor(public name: string,
@@ -24,10 +25,10 @@ export class Zivi {
 @Injectable()
 export class ZiviService {
 
-  private url = 'http://localhost:4000/api/v1/zivis';
+  private url = ENV.backendUrl + 'api/v1/zivis';
 
   static createPictureUrl(url: string) {
-    return 'http://localhost:4000/images/' + url;
+    return ENV.backendUrl + 'images/' + url;
   }
 
   static createZiviFromJsonObject(data: any) {

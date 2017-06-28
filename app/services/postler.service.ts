@@ -8,6 +8,7 @@ import {Zivi, ZiviService} from './zivi.service';
 import * as io from 'socket.io-client';
 
 import {Observable} from 'rxjs/Rx';
+import {ENV} from '../config/environment';
 
 export enum PostState {
   Idle,
@@ -24,14 +25,13 @@ export class PostlerData {
 
 @Injectable()
 export class PostlerService {
-  private apiUrl = 'http://localhost:4000/api/v1/post';
-  private socketUrl = 'http://localhost:4001';
+  private apiUrl = ENV.backendUrl + 'api/v1/post';
   private socket: SocketIOClient.Socket;
   private stateChangeObservable: Observable<PostlerData>;
 
   constructor(private http: Http) {
     this.stateChangeObservable = new Observable((observer: any) => {
-      this.socket = io.connect(this.socketUrl);
+      this.socket = io.connect(ENV.socketUrl);
       this.socket.on('post', () => {
         this.getCurrentState().subscribe(state => observer.next(state));
       });

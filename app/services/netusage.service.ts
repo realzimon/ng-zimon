@@ -4,6 +4,7 @@ import * as io from 'socket.io-client';
 import {Observable} from 'rxjs/Rx';
 import {Zivi} from './zivi.service';
 import {Subscriber} from 'rxjs/Subscriber';
+import {ENV} from '../config/environment';
 
 export class NetUsage {
     constructor(readonly hostname: string, readonly recentDownload: number, readonly recentDownloadRate: number,
@@ -14,13 +15,12 @@ export class NetUsage {
 
 @Injectable()
 export class NetUsageService {
-    private socketUrl = 'http://localhost:4001';
     private socket: any;
     private observable: Observable<NetUsage[]>;
 
     constructor() {
         this.observable = new Observable<NetUsage[]>((observer: Subscriber<NetUsage[]>) => {
-            this.socket = io.connect(this.socketUrl);
+            this.socket = io.connect(ENV.socketUrl);
             this.socket.on('netusage', (data: any) => {
                 observer.next(data.usage);
             });

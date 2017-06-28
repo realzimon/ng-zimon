@@ -6,11 +6,12 @@ import {Http, Response} from '@angular/http';
 import {Injectable} from '@angular/core';
 
 import 'rxjs/Rx';
+import {ENV} from '../config/environment';
 
 @Injectable()
 export class QuotesService {
 
-    private url = 'http://localhost:4000/api/v1/quotes/random';
+    private url = ENV.backendUrl + 'api/v1/quotes/random';
 
     constructor(private http: Http) {
     }

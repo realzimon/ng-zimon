@@ -6,6 +6,7 @@ import {Http} from '@angular/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import * as io from 'socket.io-client';
+import {ENV} from '../config/environment';
 
 export class Flade {
   constructor(public text: String, public timestamp: Date) {
@@ -15,8 +16,8 @@ export class Flade {
 
 @Injectable()
 export class FladeService {
-  private apiUrl = 'http://localhost:4000/api/v1/flade';
-  private socketUrl = 'http://localhost:4001';
+  private apiUrl = ENV.backendUrl + 'api/v1/flade';
+  private socketUrl = ENV.socketUrl;
   private socket: SocketIOClient.Socket;
   private fladeChangeObservable: Observable<Flade>;
 
