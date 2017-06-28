@@ -157,3 +157,7 @@ zivilist zivicard img {
 zivilist .row {
   justify-content: space-around;
 }
+
+.card .card-content .card-title {
+  display: inline-block;
+}
