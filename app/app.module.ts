@@ -11,9 +11,10 @@ import {TimerService} from "./services/timer.service";
 import {PostlerService} from './services/postler.service';
 import {FladeService} from "./services/flade.service";
 import {NetUsageService} from "./services/netusage.service";
+import {MaterializeModule} from 'angular2-materialize';
 
 @NgModule({
-  imports: [BrowserModule, HttpModule, DashboardModule],
+  imports: [BrowserModule, HttpModule, DashboardModule, MaterializeModule],
   declarations: [AppComponent, NavComponent],
   bootstrap: [AppComponent],
   providers: [QuotesService, ZiviService, TimerService, PostlerService, FladeService, NetUsageService]
