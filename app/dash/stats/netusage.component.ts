@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Chart} from 'chart.js';
 import {NetUsageService, NetUsage} from "../../services/netusage.service";
 
@@ -82,6 +82,9 @@ export class NetUsageComponent implements OnInit {
           beginAtZero: true,
           suggestedMax: 20,
           display: false
+        },
+        gridLines: {
+          display: false
         }
       }]
     },
@@ -89,7 +92,17 @@ export class NetUsageComponent implements OnInit {
       display: false
     },
     tooltips: {
-      intersect: false
+      intersect: false,
+      callbacks: {
+        labelColor: function (item: any, chart: Chart) {
+          let datasetColor = chart.data.datasets[item.datasetIndex].borderColor;
+          return {
+            borderColor: datasetColor,
+            backgroundColor: datasetColor
+          };
+        }
+      },
+      mode: 'index'
     },
     elements: {
       line: {
