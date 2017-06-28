@@ -10,6 +10,7 @@ The repository at hand contains the Angular 2 frontend.
 ```bash
 git clone git@github.com:realzimon/ng-zimon.git
 cd ng-zimon
+cp app/config/sample-environment.ts app/config/environment.ts
 npm install
 npm start
 ```
