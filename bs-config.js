@@ -15,6 +15,12 @@ module.exports = {
       0: null // Disables request logging of lite-server
     }
   },
+  ui: {
+    port: 3001,
+    weinre: {
+      port: 3002
+    }
+  },
   ghostMode: false,
   open: false,
   reloadOnRestart: true,
