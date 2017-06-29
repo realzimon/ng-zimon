@@ -12,6 +12,7 @@ import {toast} from 'angular2-materialize';
 export class PostlerComponent {
   stateInfo: PostlerData = new PostlerData(PostState.Idle, new Date(), null);
   states = PostState;
+  error = false;
 
   constructor(private postlerService: PostlerService) {
     postlerService.onStateChange().subscribe((data: PostlerData) => {
@@ -47,11 +48,14 @@ export class PostlerComponent {
   loadPostState() {
     this.postlerService.getCurrentState()
       .retryWhen(errors => {
-        toast('Failed to fetch post state (60s)', 2000);
-        return errors.delay(60000);
+        toast('Failed to fetch post state (30s)', 2000);
+        this.stateInfo = null;
+        this.error = true;
+        return errors.delay(30000);
       })
       .subscribe((data: PostlerData) => {
         this.stateInfo = data;
+        this.error = false;
       });
   }
 }

@@ -1,4 +1,24 @@
-<div class="card red medium white-text" *ngIf="stateInfo.state === states.Idle">
+<div class="card yellow medium black-text" *ngIf="error">
+  <div class="card-content center-align valign-wrapper full-height">
+    <div class="valign full-width center-align">
+      <div class="preloader-wrapper big active">
+        <div class="spinner-layer">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+        </div>
+      </div>
+      <h4>Fehler beim Laden</h4>
+      <p>Chefzimon versucht es später erneut.</p>
+    </div>
+  </div>
+</div>
+
+<div class="card red medium white-text" *ngIf="stateInfo?.state === states.Idle">
   <div class="card-content center-align valign-wrapper full-height">
     <div class="valign full-width center-align">
       <i class="material-icons huge-icon">mail_outline</i>
@@ -6,7 +26,7 @@
   </div>
 </div>
 
-<div class="box" *ngIf="stateInfo.state === states.Preparation">
+<div class="box" *ngIf="stateInfo?.state === states.Preparation">
   <div class="card yellow accent-3 medium black-text">
     <div class="card-content">
       <span class="card-title">Postler:</span>
@@ -34,7 +54,7 @@
   </div>
 </div>
 
-<div class="card red medium white-text" *ngIf="stateInfo.state === states.Action">
+<div class="card red medium white-text" *ngIf="stateInfo?.state === states.Action">
   <div class="card-content center-align valign-wrapper full-height">
     <div class="valign full-width center-align">
       <i class="material-icons huge-icon">mail_outline</i>
@@ -81,7 +101,7 @@
   </div>
 </div>
 
-<div class="card yellow medium black-text" *ngIf="stateInfo.state == states.Reminder">
+<div class="card yellow medium black-text" *ngIf="stateInfo?.state == states.Reminder">
   <div class="card-content center-align valign-wrapper full-height">
     <div class="valign full-width center-align">
       <i class="material-icons huge-icon post-card-icon">credit_card</i>
