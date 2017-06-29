@@ -17,8 +17,17 @@ for (let prop in SAMPLE_ENV) {
   }
 }
 
-if (!ENV.socketUrl) {
-  ENV.socketUrl = SAMPLE_ENV.socketUrl;
+function finalCharIsNotSlash(str: string): boolean {
+  return !str || str.charAt(str.length - 1) != '/';
+}
+
+if (finalCharIsNotSlash(ENV.socketUrl)) {
+  console.error('Socket URL needs a slash at the end! This might be an error in the future.');
+  ENV.socketUrl += '/';
+}
+if (finalCharIsNotSlash(ENV.backendUrl)) {
+  console.error('Backend URL needs a slash at the end! This might be an error in the future.');
+  ENV.backendUrl += '/';
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule).catch(err => {
