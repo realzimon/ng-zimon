@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="node_modules/material-design-icons-iconfont/dist/material-design-icons.css">
   <link rel="stylesheet" href="node_modules/flexboxgrid/dist/flexboxgrid.min.css">
 
   <!-- Polyfill(s) for older browsers -->
@@ -23,10 +23,9 @@
   <script>
       System.import('app').catch(function (err) {
           console.error(err);
-          $('#loading-header').text('El Señor Chefzimon ist unfehlbar');
-          $('#loading-detail').text('Es ist ein Fehler beim Laden aufgetreten.')
-            .after('<blockquote><pre>' + err + '</pre></blockquote>');
-          $('.indeterminate').addClass('red darken-4');
+          $('#loaderror-pre').text(err);
+          $('#zimon-load-bar').hide(400);
+          $('#zimon-error-bar').show(400);
       });
   </script>
 
@@ -37,7 +36,7 @@
 <zimon>
   <div class="container full-height">
     <div class="valign-wrapper full-height">
-      <div class="valign center-align full-width">
+      <div class="valign center-align full-width" id="zimon-load-bar">
         <h1 class="orange-text" id="loading-header">Lade El Se&ntilde;or Chefzimon</h1>
         <p id="loading-detail">
           Chefzimon ist noch rein dienstlich unterwegs!
@@ -46,6 +45,16 @@
           <strong>Bitte aktiviere JavaScript, um diese Seite benutzen zu können.</strong>
         </noscript>
         <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+      </div>
+      <div class="valign center-align full-width" id="zimon-error-bar" style="display: none;">
+        <h1 class="red-text">El Se&ntilde;or Chefzimon ist unfehlbar</h1>
+        <p>Es ist ein Fehler beim Laden aufgetreten.</p>
+        <blockquote>
+          <pre id="loaderror-pre"></pre>
+        </blockquote>
+        <div class="progress red darken-4">
           <div class="indeterminate"></div>
         </div>
       </div>
