@@ -1,36 +1,30 @@
 import {Injectable} from '@angular/core';
-import * as io from 'socket.io-client';
 
 import {Observable} from 'rxjs/Rx';
 import {Zivi} from './zivi.service';
 import {Subscriber} from 'rxjs/Subscriber';
-import {ENV} from '../config/environment';
+import {SocketService} from './socket.service';
 
 export class NetUsage {
-    constructor(readonly hostname: string, readonly recentDownload: number, readonly recentDownloadRate: number,
-                readonly totalDownload: number, readonly mac: string, readonly zivi: Zivi) {
+  constructor(readonly hostname: string, readonly recentDownload: number, readonly recentDownloadRate: number,
+              readonly totalDownload: number, readonly mac: string, readonly zivi: Zivi) {
 
-    }
+  }
 }
 
 @Injectable()
 export class NetUsageService {
-    private socket: any;
-    private observable: Observable<NetUsage[]>;
+  private observable: Observable<NetUsage[]>;
 
-    constructor() {
-        this.observable = new Observable<NetUsage[]>((observer: Subscriber<NetUsage[]>) => {
-            this.socket = io.connect(ENV.socketUrl);
-            this.socket.on('netusage', (data: any) => {
-                observer.next(data.usage);
-            });
-            return () => {
-                this.socket.disconnect();
-            };
-        });
-    }
+  constructor(private socketService: SocketService) {
+    this.observable = new Observable<NetUsage[]>((observer: Subscriber<NetUsage[]>) => {
+      socketService.on('netusage', (data: any) => {
+        observer.next(data.usage);
+      });
+    });
+  }
 
-    getNetUsageUpdates(): Observable<NetUsage[]> {
-        return this.observable;
-    }
+  getNetUsageUpdates(): Observable<NetUsage[]> {
+    return this.observable;
+  }
 }

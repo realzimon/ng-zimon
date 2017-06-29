@@ -7,8 +7,23 @@ import {Injectable} from '@angular/core';
 
 import 'rxjs/Rx';
 import {ENV} from '../config/environment';
+import {Observable} from 'rxjs/Observable';
 
 export class Zivi {
+  public static fromDTO(rawData: any) {
+    if (!rawData) {
+      return null;
+    } else {
+      return new Zivi(
+        rawData.name, rawData.name_mx,
+        rawData.post_count, rawData.color,
+        rawData.colorHex,
+        ZiviService.createPictureUrl(rawData.picture),
+        rawData.first, rawData.addresses
+      );
+    }
+  }
+
   constructor(public name: string,
               public name_mx: string,
               public post_count: number,
@@ -19,7 +34,6 @@ export class Zivi {
               public addresses: string[]) {
 
   }
-
 }
 
 @Injectable()
@@ -31,30 +45,14 @@ export class ZiviService {
     return ENV.backendUrl + 'images/' + url;
   }
 
-  static createZiviFromJsonObject(data: any) {
-    if (!data) {
-      return null;
-    } else {
-      return new Zivi(data.name,
-        data.name_mx,
-        data.post_count,
-        data.color,
-        data.colorHex,
-        ZiviService.createPictureUrl(data.picture),
-        data.first,
-        data.addresses
-      );
-    }
-  }
-
   constructor(private http: Http) {
   }
 
-  getAllZivis() {
+  getAllZivis(): Observable<Zivi[]> {
     return this.http.get(this.url)
       .map(res => res.json())
       .map(res => {
-        return res.zivis.map((zivi: any) => ZiviService.createZiviFromJsonObject(zivi));
+        return res.zivis.map((rawData: any) => Zivi.fromDTO(rawData));
       });
   }
 }

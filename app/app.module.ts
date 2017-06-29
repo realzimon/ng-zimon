@@ -12,12 +12,13 @@ import {PostlerService} from './services/postler.service';
 import {FladeService} from "./services/flade.service";
 import {NetUsageService} from "./services/netusage.service";
 import {MaterializeModule} from 'angular2-materialize';
+import {SocketService} from './services/socket.service';
 
 @NgModule({
   imports: [BrowserModule, HttpModule, DashboardModule, MaterializeModule],
   declarations: [AppComponent, NavComponent],
   bootstrap: [AppComponent],
-  providers: [QuotesService, ZiviService, TimerService, PostlerService, FladeService, NetUsageService]
+  providers: [QuotesService, ZiviService, TimerService, PostlerService, FladeService, NetUsageService, SocketService]
 })
 export class AppModule {
 }

@@ -5,10 +5,10 @@
 import {Http} from '@angular/http';
 import {Injectable} from '@angular/core';
 import {Zivi, ZiviService} from './zivi.service';
-import * as io from 'socket.io-client';
 
 import {Observable} from 'rxjs/Rx';
 import {ENV} from '../config/environment';
+import {SocketService} from './socket.service';
 
 export enum PostState {
   Idle,
@@ -18,6 +18,14 @@ export enum PostState {
 }
 
 export class PostlerData {
+  public static fromDTO(rawData: any): PostlerData {
+    return new PostlerData(
+      PostState[<string>rawData.state],
+      new Date(rawData.timestamp),
+      Zivi.fromDTO(rawData.zivi)
+    );
+  }
+
   constructor(public state: PostState, public timestamp: Date, public postler: Zivi) {
 
   }
@@ -26,34 +34,25 @@ export class PostlerData {
 @Injectable()
 export class PostlerService {
   private apiUrl = ENV.backendUrl + 'api/v1/post';
-  private socket: SocketIOClient.Socket;
   private stateChangeObservable: Observable<PostlerData>;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private socketService: SocketService) {
     this.stateChangeObservable = new Observable((observer: any) => {
-      this.socket = io.connect(ENV.socketUrl);
-      this.socket.on('post', () => {
-        this.getCurrentState().subscribe(state => observer.next(state));
+      socketService.on('post', (res: any) => {
+        observer.next(PostlerData.fromDTO(res.post));
       });
-      return () => {
-        this.socket.disconnect();
-      };
     });
   }
 
-  getCurrentState() {
+  getCurrentState(): Observable<PostlerData> {
     return this.http.get(this.apiUrl)
       .map(res => res.json())
       .map(res => {
-        return new PostlerData(
-          PostState[<string>res.state],
-          new Date(res.timestamp),
-          ZiviService.createZiviFromJsonObject(res.zivi)
-        );
+        return PostlerData.fromDTO(res);
       });
   }
 
-  onStateChange() {
+  onStateChange(): Observable<PostlerData> {
     return this.stateChangeObservable;
   }
 
@@ -62,8 +61,8 @@ export class PostlerService {
       action: action
     })
     // Handle the empty response
-    .map((res) => {
-      return res.text() ? res.json() : {};
-    });
+      .map((res) => {
+        return res.text() ? res.json() : {};
+      });
   }
 }

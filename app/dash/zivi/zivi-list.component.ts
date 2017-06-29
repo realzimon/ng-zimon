@@ -12,18 +12,16 @@ import {TimerService} from "../../services/timer.service";
 export class ZiviListComponent {
 
   zivis: Zivi[];
-  remainingMins: number;
-  remainingSecs: number;
+  remainingMins: number = 0;
+  remainingSecs: number = 0;
   loadFlag: boolean = false;
 
   constructor(private ziviService: ZiviService, private timerService: TimerService) {
     this.loadZivis();
     timerService.getTimerUpdates().subscribe((data: any) => {
       if(this.loadFlag){
-        this.loadFlag = false;
-        this.loadZivis();
-      }
-      if(data.remaining === 0){
+        this.loadZivis(() => this.loadFlag = false);
+      } else if(data.remaining === 0 || !this.zivis){
         this.loadFlag = true;
       }
       this.remainingMins = ~~(data.remaining / 60);
@@ -31,9 +29,10 @@ export class ZiviListComponent {
     });
   }
 
-  loadZivis(){
+  loadZivis(callback?: (zivis: Zivi[]) => void){
     this.ziviService.getAllZivis().subscribe(zivis => {
       this.zivis = zivis;
+      callback && callback(zivis);
     });
   }
 
