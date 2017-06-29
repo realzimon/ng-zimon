@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {PostState, PostlerData, PostlerService} from '../../services/postler.service';
+import {toast} from 'angular2-materialize';
 
 @Component({
   selector: 'postler',
@@ -21,11 +22,11 @@ export class PostlerComponent {
 
   handleKeyboardEvent(event: KeyboardEvent) {
     if (this.stateInfo.state === PostState.Preparation) {
-      if (event.keyCode === 79) {
+      if (event.keyCode === 79) { // 'a'ccept
         this.submitAction('accepted');
-      } else if (event.keyCode === 78) {
+      } else if (event.keyCode === 78) { // 'n'ext
         this.submitAction('next');
-      } else if (event.keyCode === 75) {
+      } else if (event.keyCode === 75) { //'k'ancel (German: 'k'eine Post)
         this.submitAction('cancel');
       }
     } else if (this.stateInfo.state === PostState.Reminder && event.keyCode === 72) { // 'h'ave returned
@@ -34,14 +35,23 @@ export class PostlerComponent {
   }
 
   submitAction(action: string) {
-    this.postlerService.sendAction(action).subscribe((data: any) => {
-      this.loadPostState();
-    });
+    this.postlerService.sendAction(action)
+      .subscribe(() => {
+        this.loadPostState();
+      }, (err) => {
+        console.error('Unable to submit post action', action, 'due to', err);
+        toast('Unable to submit post action, try again later.', 10000);
+      });
   }
 
   loadPostState() {
-    this.postlerService.getCurrentState().subscribe((data: PostlerData) => {
-      this.stateInfo = data;
-    });
+    this.postlerService.getCurrentState()
+      .retryWhen(errors => {
+        toast('Failed to fetch post state (60s)', 2000);
+        return errors.delay(60000);
+      })
+      .subscribe((data: PostlerData) => {
+        this.stateInfo = data;
+      });
   }
 }

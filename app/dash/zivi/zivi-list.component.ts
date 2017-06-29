@@ -33,9 +33,9 @@ export class ZiviListComponent {
   loadZivis(callback?: (zivis: Zivi[]) => void) {
     this.ziviService.getAllZivis()
       .retryWhen(errors => {
-        toast('Unable to fetch Zivis for list (130s)', 5000);
+        toast('Unable to fetch Zivis for list (10s)', 2000);
         return errors.delay(10000);
-      }) //wait 10s on error
+      })
       .subscribe(zivis => {
         this.zivis = zivis;
         callback && callback(zivis);
