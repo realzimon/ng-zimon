@@ -5,4 +5,5 @@ import {Component} from '@angular/core';
   templateUrl: 'app/dash/bernie/bernie.component.html'
 })
 export class BernieComponent {
+  loading = true;
 }

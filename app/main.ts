@@ -9,4 +9,9 @@ if(ENV.production){
     enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+platformBrowserDynamic().bootstrapModule(AppModule).catch(err => {
+  console.error(err);
+  $('#loaderror-pre').text(err);
+  $('#zimon-load-bar').hide(400);
+  $('#zimon-error-bar').show(400);
+});

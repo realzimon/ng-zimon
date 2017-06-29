@@ -42,7 +42,8 @@ export class PostStats implements OnInit {
   };
 
   private chart: Chart;
-
+  private loadFlag = false;
+  private error = false;
   zivis: Zivi[];
 
   constructor(private ziviService: ZiviService, private postService: PostlerService) {
@@ -57,13 +58,25 @@ export class PostStats implements OnInit {
   }
 
   loadGraphData() {
-    this.ziviService.getAllZivis().subscribe(zivis => {
-      zivis.sort((a: Zivi, b: Zivi) => {
-        return a.post_count < b.post_count ? 1 : a.post_count > b.post_count ? -1 : 0;
+    if (this.loadFlag) {
+      return;
+    } else {
+      this.loadFlag = true;
+    }
+    this.ziviService.getAllZivis()
+      .retryWhen(errors => {
+        this.error = true;
+        return errors.delay(30000);
+      })
+      .subscribe(zivis => {
+        zivis.sort((a: Zivi, b: Zivi) => {
+          return a.post_count < b.post_count ? 1 : a.post_count > b.post_count ? -1 : 0;
+        });
+        this.zivis = zivis;
+        this.updateGraph();
+        this.loadFlag = false;
+        this.error = false;
       });
-      this.zivis = zivis;
-      this.updateGraph();
-    });
   }
 
   updateGraph() {

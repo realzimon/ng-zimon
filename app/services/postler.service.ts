@@ -4,7 +4,7 @@
 
 import {Http} from '@angular/http';
 import {Injectable} from '@angular/core';
-import {Zivi, ZiviService} from './zivi.service';
+import {Zivi} from './zivi.service';
 
 import {Observable} from 'rxjs/Rx';
 import {ENV} from '../config/environment';

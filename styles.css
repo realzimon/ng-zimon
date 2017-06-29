@@ -161,3 +161,11 @@ zivilist .row {
 .card .card-content .card-title {
   display: inline-block;
 }
+
+pre#loaderror-pre {
+  white-space: pre-wrap;
+}
+
+[hidden] {
+  display: none;
+}

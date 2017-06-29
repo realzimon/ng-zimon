@@ -48,7 +48,6 @@ export class PostlerComponent {
   loadPostState() {
     this.postlerService.getCurrentState()
       .retryWhen(errors => {
-        toast('Failed to fetch post state (30s)', 2000);
         this.stateInfo = null;
         this.error = true;
         return errors.delay(30000);

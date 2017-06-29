@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FladeService, Flade} from '../../services/flade.service';
+import {FladeService, Flade, FladeResult} from '../../services/flade.service';
 
 @Component({
   selector: 'flade',
@@ -10,18 +10,32 @@ import {FladeService, Flade} from '../../services/flade.service';
 })
 export class FladeComponent {
   flade: Flade = new Flade('... [f]laden ...', new Date());
+  error = false;
 
   constructor(private fladeService: FladeService) {
-    fladeService.getChangeObservable().subscribe(flade => this.flade = flade);
+    fladeService.getChangeObservable().subscribe(res => this.setFladeFromResult(res));
     this.updateFlade();
   }
 
   private updateFlade() {
-    this.fladeService.getCurrentFlade().subscribe(flade => this.flade = flade);
+    this.fladeService.getCurrentFlade()
+      .retryWhen(errors => {
+        this.error = true;
+        return errors.delay(120000);
+      })
+      .subscribe(res => this.setFladeFromResult(res));
+  }
+
+  private setFladeFromResult(res: FladeResult) {
+    this.flade = res.flade;
+    this.error = res.error;
+    if (res.error) {
+      console.error('Error retrieving Flade', res.error);
+    }
   }
 
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.keyCode === 70 /* F */) {
+    if (event.keyCode === 70 /* f */) {
       this.updateFlade();
     }
   }

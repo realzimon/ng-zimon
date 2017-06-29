@@ -2,8 +2,14 @@
   <div class="card small blue-grey darken-2 white-text">
     <div class="card-content chart-card-content">
       <span class="card-title card-title-condensed">Wer hat am häufigsten die Post gemacht?</span>
-      <div class="chart-wrapper">
+      <div class="chart-wrapper" [hidden]="error">
         <canvas id="poststats-canvas"></canvas>
+      </div>
+      <div class="valign-wrapper center-align full-height" [hidden]="!error">
+        <div class="valign full-width center-align">
+          <p>Die Poststatistik ist momentan aufgrund eines schadhaften Fahrzeuges im Bereich Schottenring nicht verf&uuml;gbar.
+            Wir bitten um Ihnen Ihr Verständnis.</p>
+        </div>
       </div>
     </div>
   </div>

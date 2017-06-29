@@ -1,7 +1,8 @@
 <div class="box">
   <div class="card small pink darken-2 white-text">
     <div class="valign-wrapper full-height">
-        <img src="https://i.giphy.com/3o6ZtePsqpjpew9Kzm.gif" class="valign" />
+      <img src="https://i.giphy.com/3o6ZtePsqpjpew9Kzm.gif" class="valign" (load)="loading = false"/>
+      <p *ngIf="loading">Bernie Sanders ist momentan leider nicht verfügbar. Bitte versuchen Sie es später erneut.</p>
     </div>
   </div>
 </div>
