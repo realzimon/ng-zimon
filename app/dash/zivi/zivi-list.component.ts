@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Zivi, ZiviService} from '../../services/zivi.service';
 import {TimerService} from "../../services/timer.service";
+import {toast} from "angular2-materialize";
 
 @Component({
   selector: 'zivilist',
@@ -19,9 +20,9 @@ export class ZiviListComponent {
   constructor(private ziviService: ZiviService, private timerService: TimerService) {
     this.loadZivis();
     timerService.getTimerUpdates().subscribe((data: any) => {
-      if(this.loadFlag){
+      if (this.loadFlag) {
         this.loadZivis(() => this.loadFlag = false);
-      } else if(data.remaining === 0 || !this.zivis){
+      } else if (data.remaining === 0) {
         this.loadFlag = true;
       }
       this.remainingMins = ~~(data.remaining / 60);
@@ -29,11 +30,16 @@ export class ZiviListComponent {
     });
   }
 
-  loadZivis(callback?: (zivis: Zivi[]) => void){
-    this.ziviService.getAllZivis().subscribe(zivis => {
-      this.zivis = zivis;
-      callback && callback(zivis);
-    });
+  loadZivis(callback?: (zivis: Zivi[]) => void) {
+    this.ziviService.getAllZivis()
+      .retryWhen(errors => {
+        toast('Unable to fetch Zivis for list (130s)', 5000);
+        return errors.delay(10000);
+      }) //wait 10s on error
+      .subscribe(zivis => {
+        this.zivis = zivis;
+        callback && callback(zivis);
+      });
   }
 
 
