@@ -17,6 +17,8 @@ export class PostlerComponent {
   constructor(private postlerService: PostlerService) {
     postlerService.onStateChange().subscribe((data: PostlerData) => {
       this.stateInfo = data;
+      this.error = false;
+      console.info('Received post change', data);
     });
     this.loadPostState();
   }
