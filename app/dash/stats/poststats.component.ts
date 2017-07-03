@@ -22,6 +22,11 @@ export class PostStats implements OnInit {
           color: 'rgba(255,255,255,0.4)',
           zeroLineColor: '#ffffff'
         }
+      }],
+      xAxes: [{
+        ticks: {
+          display: false
+        }
       }]
     },
     legend: {
