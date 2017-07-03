@@ -37,7 +37,7 @@ nav .brand-logo.left {
 
 .post-action-icon {
   width: 100%;
-  margin-top: 0.3em;
+  margin-top: 0;
   margin-bottom: 0.3em;
   text-align: center;
   animation: wenns-wirklich-wichtig-is 3s linear infinite;
@@ -152,6 +152,12 @@ zivilist zivicard .card {
 
 zivilist zivicard img {
   max-height: 200px;
+}
+
+zivilist zivicard .card .card-content {
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
 }
 
 zivilist .row {

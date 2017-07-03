@@ -5,8 +5,7 @@ module.exports = {
   ],
   watchOptions: {
     ignored: [
-      'node_modules',
-      'styles.css'
+      'node_modules'
     ]
   },
   server: {

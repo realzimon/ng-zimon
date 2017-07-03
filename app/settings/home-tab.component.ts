@@ -37,9 +37,6 @@ export class ZiviListComponent {
         return errors.delay(10000);
       })
       .subscribe(zivis => {
-        if (zivis.length > 6) {
-          zivis.splice(7);
-        }
         this.zivis = zivis;
         callback && callback(zivis);
       });
