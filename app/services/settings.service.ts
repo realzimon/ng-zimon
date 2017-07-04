@@ -4,6 +4,7 @@ import {MaterializeAction} from 'angular2-materialize';
 @Injectable()
 export class SettingsService {
   modalActions = new EventEmitter<string|MaterializeAction>();
+  public chefziviMode = false;
 
   constructor() {
 

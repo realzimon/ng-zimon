@@ -32,5 +32,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</pre>
   </div>
-  <br>
+
+  <div class="card-panel kriegsrecht-panel">
+    <h1>Kriegsrecht ausrufen</h1>
+    <p>In Ausnahmesituationen kann der Chefzivi das Kriegsrecht ausrufen. Dann entscheidet er ohne jegliche Beratung
+      durch den Chefzimon alle Zuweisungen zu T&auml;tigkeiten. Dadurch kann er gezielt Revolutionen, Meutereien und
+      Blaphemie entgegentreten.</p>
+    <form #homeForm="ngForm" class="kriegsrecht-form">
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-1 black-text">
+          <input type="checkbox" id="chefzivi-confirm" name="chefzivi-confirm" [(ngModel)]="chefziviConfirm">
+          <label for="chefzivi-confirm">I bims, der Chefzivi</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-2">
+          <input type="checkbox" id="chefzivi-kriegsrecht" [(ngModel)]="settingsService.chefziviMode"
+                 [disabled]="!chefziviConfirm" name="chefziviMode">
+          <label for="chefzivi-kriegsrecht" class="red-text">Kriegsrecht ausrufen!</label>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

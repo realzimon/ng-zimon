@@ -1,5 +1,5 @@
 <div class="card medium blue white-text">
-  <div class="card-content box" *ngIf="zivis">
+  <div class="card-content box" *ngIf="zivis && !settingsService.chefziviMode">
     <div>
       <span class="card-title col-xs">Wer macht's?</span>
       <span class="card-title right-align col-xs">Wer anderer macht's in: {{remainingMins | numberFixedLen: 2}}:{{remainingSecs | numberFixedLen: 2}}</span>
@@ -8,11 +8,19 @@
       <zivicard *ngFor="let zivi of zivis" [zivi]="zivi" class="col-xs"></zivicard>
     </div>
   </div>
-  <div class="card-content valign-wrapper full-height" *ngIf="!zivis">
+  <div class="card-content valign-wrapper full-height" *ngIf="!zivis && !settingsService.chefziviMode">
       <div class="valign center-align full-width">
         <h3>Zivireihenfolge außer Betrieb</h3>
         <p class="flow-text">Bitte beachten Sie die Fahrplanaushänge.</p>
         <p class="flow-text">Chefzivi entscheidet.</p>
       </div>
+  </div>
+  <div class="card-content valign-wrapper full-height" *ngIf="settingsService.chefziviMode">
+    <div class="valign center-align full-width">
+      <h3 class="war-heading">Zivireihenfolge außer Betrieb</h3>
+      <p class="flow-text">Es wurde das Kriegsrecht ausgerufen.</p>
+      <p class="flow-text">Panik wird strafrechtlich verfolgt.</p>
+      <p class="flow-text war-margin">Chefzivi entscheidet.</p>
+    </div>
   </div>
 </div>

@@ -2,6 +2,7 @@ import {Component, NgZone} from '@angular/core';
 import {Zivi, ZiviService} from '../../services/zivi.service';
 import {TimerService} from "../../services/timer.service";
 import {toast} from "angular2-materialize";
+import {SettingsService} from '../../services/settings.service';
 
 @Component({
   selector: 'zivilist',
@@ -17,7 +18,7 @@ export class ZiviListComponent {
   remainingSecs: number = 0;
   loadFlag: boolean = false;
 
-  constructor(private ziviService: ZiviService, private timerService: TimerService, private zone: NgZone) {
+  constructor(private ziviService: ZiviService, private timerService: TimerService, private settingsService: SettingsService) {
     this.loadZivis();
     timerService.getTimerUpdates().subscribe((data: any) => {
       if (this.loadFlag) {

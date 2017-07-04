@@ -164,6 +164,26 @@ zivilist .row {
   justify-content: space-around;
 }
 
+zivilist .card .card-content p.war-margin {
+  margin-top: 1em;
+}
+
+zivilist .war-heading {
+  animation: war-is-not-over 3s linear infinite;
+}
+
+@keyframes war-is-not-over {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 ziviedit .card-content .row {
   font-size: 120%;
 }
@@ -207,4 +227,13 @@ pre#loaderror-pre {
 
 .settings-modal.bottom-sheet {
   max-height: 90%;
+}
+
+.kriegsrecht-panel {
+  background: transparent; /* checkboxes seem to hide behind the panels? No idea */
+}
+
+.kriegsrecht-form label {
+  color: #444444;
+  font-size: 120%;
 }
