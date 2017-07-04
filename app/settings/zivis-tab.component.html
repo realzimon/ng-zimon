@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="card-panel teal lighten-2 white-text">
+    <h1>Zivis bearbeiten</h1>
+  </div>
+  <div class="card-panel red white-text" *ngIf="error">
+    <h1>Fehler beim Laden der Zivis</h1>
+    <p>{{error}}</p>
+  </div>
+  <div class="row">
+    <ziviedit *ngFor="let zivi of zivis; let i = index;" [zivi]="zivi" [index]="i"></ziviedit>
+  </div>
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large green" (click)="addNewZivi()">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
+</div>

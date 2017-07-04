@@ -1,6 +1,6 @@
 <div class="card" [ngClass]="zivi.color">
     <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" [src]="zivi.picture" >
+        <img class="activator" [src]="zivi.getFullPictureUrl()" >
     </div>
     <div class="card-content" >
         <span class="card-title activator white-text">{{ zivi.name }}</span>

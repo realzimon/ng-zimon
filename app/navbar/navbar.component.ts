@@ -2,9 +2,10 @@
  * Component for the main navigation bar.
  */
 
-import {Component} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import {QuotesService} from '../services/quotes.service';
 import {TimerService} from '../services/timer.service';
+import {SettingsService} from '../services/settings.service';
 
 @Component({
   selector: 'navbar',
@@ -17,7 +18,8 @@ export class NavComponent {
   randomQuote = 'Random Quote';
   time = new Date();
 
-  constructor(private quoteService: QuotesService, private timerService: TimerService) {
+  constructor(private quoteService: QuotesService, private timerService: TimerService,
+              public settingsService: SettingsService, private zone: NgZone) {
     timerService.getTimerUpdates().subscribe((data: any) => {
       this.time = new Date();
       if (data.remaining % 30 === 0) {

@@ -8,8 +8,11 @@ import {Injectable} from '@angular/core';
 import 'rxjs/Rx';
 import {ENV} from '../config/environment';
 import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 
 export class Zivi {
+  public create: boolean;
+
   public static fromDTO(rawData: any) {
     if (!rawData) {
       return null;
@@ -18,7 +21,7 @@ export class Zivi {
         rawData.name, rawData.name_mx,
         rawData.post_count, rawData.color,
         rawData.colorHex,
-        ZiviService.createPictureUrl(rawData.picture),
+        rawData.picture,
         rawData.first, rawData.addresses
       );
     }
@@ -34,12 +37,28 @@ export class Zivi {
               public addresses: string[]) {
 
   }
+
+  public clone(): Zivi {
+    return new Zivi(
+      this.name, this.name_mx, this.post_count, this.color, this.colorHex, this.picture, this.first, this.addresses
+    );
+  }
+
+  getFullPictureUrl(): string {
+    if (!this.picture || this.picture.startsWith('http')) {
+      return this.picture;
+    } else {
+      return ZiviService.createPictureUrl(this.picture);
+    }
+  }
 }
 
 @Injectable()
 export class ZiviService {
-
-  private url = ENV.backendUrl + 'api/v1/zivis';
+  private listUrl = ENV.backendUrl + 'api/v1/zivis';
+  private createUrl = ENV.backendUrl + 'api/v1/zivis/create';
+  private updateUrl = ENV.backendUrl + 'api/v1/zivis/update';
+  private ziviUpdates = new Subject();
 
   static createPictureUrl(url: string) {
     return ENV.backendUrl + 'images/' + url;
@@ -48,11 +67,38 @@ export class ZiviService {
   constructor(private http: Http) {
   }
 
+  getZiviUpdates(): Subject<{}> {
+    return this.ziviUpdates;
+  }
+
   getAllZivis(): Observable<Zivi[]> {
-    return this.http.get(this.url)
+    return this.http.get(this.listUrl)
       .map(res => res.json())
       .map(res => {
         return res.zivis.map((rawData: any) => Zivi.fromDTO(rawData));
       });
+  }
+
+  createNewZivi(spec: Zivi): Observable<Zivi> {
+    return this.http.post(this.createUrl, {spec: spec})
+      .map(res => res.json())
+      .flatMap(res => this.dtoToObservable(res));
+  }
+
+  updateZivi(name: string, spec: Zivi): Observable<Zivi> {
+    return this.http.post(this.updateUrl, {name: name, spec: spec})
+      .map(res => res.json())
+      .flatMap(res => this.dtoToObservable(res));
+  }
+
+  private dtoToObservable(res: any): Observable<Zivi> {
+    return new Observable(subscriber => {
+      if (!res || res.error || !res.zivi) {
+        subscriber.error(res.error || 'unknown error');
+      } else {
+        subscriber.next(Zivi.fromDTO(res.zivi));
+        this.ziviUpdates.next();
+      }
+    });
   }
 }

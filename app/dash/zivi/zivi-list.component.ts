@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import {Zivi, ZiviService} from '../../services/zivi.service';
 import {TimerService} from "../../services/timer.service";
 import {toast} from "angular2-materialize";
@@ -17,7 +17,7 @@ export class ZiviListComponent {
   remainingSecs: number = 0;
   loadFlag: boolean = false;
 
-  constructor(private ziviService: ZiviService, private timerService: TimerService) {
+  constructor(private ziviService: ZiviService, private timerService: TimerService, private zone: NgZone) {
     this.loadZivis();
     timerService.getTimerUpdates().subscribe((data: any) => {
       if (this.loadFlag) {
@@ -28,6 +28,18 @@ export class ZiviListComponent {
       this.remainingMins = ~~(data.remaining / 60);
       this.remainingSecs = data.remaining % 60;
     });
+    ziviService.getZiviUpdates().subscribe(() => this.loadFlag = true);
+  }
+
+  static numberFixedLen(value: number, len: number): string {
+    if (isNaN(value) || isNaN(value)) {
+      return '' + value;
+    }
+    let num: string = '' + value;
+    while (num.length < len) {
+      num = '0' + num;
+    }
+    return num;
   }
 
   loadZivis(callback?: (zivis: Zivi[]) => void) {

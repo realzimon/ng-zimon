@@ -1,18 +1,36 @@
-<div class="card medium blue white-text">
-  <div class="card-content box" *ngIf="zivis">
-    <div>
-      <span class="card-title col-xs">Wer macht's?</span>
-      <span class="card-title right-align col-xs">Wer anderer macht's in: {{remainingMins | numberFixedLen: 2}}:{{remainingSecs | numberFixedLen: 2}}</span>
-    </div>
-    <div class="row" *ngIf="zivis">
-      <zivicard *ngFor="let zivi of zivis" [zivi]="zivi" class="col-xs"></zivicard>
-    </div>
+<div class="container">
+  <div class="card-panel teal lighten-2 white-text">
+    <h1>El Se&ntilde;or Chefzimon</h1>
+    <p class="flow-text">
+      Zimon wouldn't be possible without the help of our very amazing contributors
+      over at <a href="https://github.com/realzimon" class="grey-text text-lighten-2">GitHub</a>. If you have any
+      issues, don't hesitate to report them to the respective repository. Please don't forget that Zimon is always
+      right.
+    </p>
   </div>
-  <div class="card-content valign-wrapper full-height" *ngIf="!zivis">
-      <div class="valign center-align full-width">
-        <h3>Zivireihenfolge außer Betrieb</h3>
-        <p class="flow-text">Bitte beachten Sie die Fahrplanaushänge.</p>
-        <p class="flow-text">Chefzivi entscheidet.</p>
-      </div>
+  <div class="card-panel orange lighten-4">
+    <pre>
+The MIT License
+
+Copyright (c) 2014-2017 The Zimon Team
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</pre>
   </div>
+  <br>
 </div>
