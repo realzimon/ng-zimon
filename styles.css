@@ -138,14 +138,6 @@ img#zimon-hat {
   height: 250px;
 }
 
-feel-the-bern .card {
-  padding: 0.5em;
-}
-
-feel-the-bern .card img {
-  width: 100%;
-}
-
 zivilist zivicard .card {
   max-width: 200px;
 }
@@ -236,4 +228,15 @@ pre#loaderror-pre {
 .kriegsrecht-form label {
   color: #444444;
   font-size: 120%;
+}
+
+feel-the-bern .card {
+  text-align: center;
+}
+
+feel-the-bern img {
+  height: 220px;
+  width: auto;
+  margin: 15px;
+  display: inline;
 }
