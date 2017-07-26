@@ -7,5 +7,6 @@ any missing ones will be automatically inherited from the defaults.
 export const ENV = {
   production: false,
   backendUrl: 'http://localhost:4000/',
-  socketUrl: 'http://localhost:4001/'
+  socketUrl: 'http://localhost:4001/',
+  enableNetUsage: false
 };

@@ -10,7 +10,7 @@
   </div>
   <div class="row">
     <feel-the-bern class="col-xs-4"></feel-the-bern>
-    <netusage class="col-xs-4"></netusage>
+    <netusage class="col-xs-4" *ngIf="env.enableNetUsage"></netusage>
   </div>
 </div>
 <settings-modal></settings-modal>
