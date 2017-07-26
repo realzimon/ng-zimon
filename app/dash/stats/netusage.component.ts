@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Chart} from 'chart.js';
-import {NetUsageService, NetUsage} from "../../services/netusage.service";
+import {NetUsageService, NetUsage} from '../../services/netusage.service';
 
 class UsageDataSet {
   readonly data: number[];
@@ -9,15 +9,15 @@ class UsageDataSet {
   borderWidth: number;
   readonly pointRadius = 0;
 
-  constructor(readonly mac: string) {
-    this.label = mac;
-    this.data = new Array(20).fill(0);
-  }
-
   static fromUsage(usage: NetUsage): UsageDataSet {
     let result = new UsageDataSet(usage.mac);
     result.updateFromUsage(usage);
     return result;
+  }
+
+  constructor(readonly mac: string) {
+    this.label = mac;
+    this.data = new Array(20).fill(0);
   }
 
   updateFromUsage(usage: NetUsage) {
@@ -25,7 +25,7 @@ class UsageDataSet {
       console.error('UsageDataSet', this, 'updated with different mac:', usage);
     }
     this.data.shift();
-    this.data.push(Math.ceil(usage.recentDownloadRate / 1000)); //convert bit/s to kbit/s
+    this.data.push(Math.ceil(usage.recentDownloadRate / 1000)); // convert bit/s to kbit/s
     this.computeColorAndWidthFromUsage(usage);
     this.label = usage.hostname || usage.mac;
   }
@@ -49,7 +49,7 @@ class UsageDataSet {
       this.borderColor = usage.zivi.colorHex;
     } else {
       this.borderColor = '#ffffff';
-      this.borderWidth = 1; //px
+      this.borderWidth = 1; // px
     }
   }
 }
@@ -124,7 +124,7 @@ export class NetUsageComponent implements OnInit {
   public chart: Chart;
 
   constructor(private netUsageService: NetUsageService) {
-    this.chartProperties.data.labels.fill("kbit/s");
+    this.chartProperties.data.labels.fill('kbit/s');
     this.netUsageService.getNetUsageUpdates().subscribe((usages: NetUsage[]) => {
       this.updateGraphFromUsages(usages);
     });

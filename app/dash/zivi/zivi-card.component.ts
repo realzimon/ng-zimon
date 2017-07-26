@@ -17,6 +17,6 @@ export class ZiviCardComponent {
   }
 
   handleKeyboardEvent(event: KeyboardEvent) {
-    //todo
+    // todo
   }
 }

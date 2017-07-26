@@ -4,7 +4,7 @@ import {AppModule} from './app.module';
 
 import {ENV} from './config/environment';
 import {ENV as SAMPLE_ENV} from './config/sample-environment';
-import {enableProdMode} from "@angular/core";
+import {enableProdMode} from '@angular/core';
 
 if (ENV.production) {
   enableProdMode();
@@ -12,13 +12,13 @@ if (ENV.production) {
 
 for (let prop in SAMPLE_ENV) {
   if (ENV[prop] === undefined) {
-    console.info('Using default value for config property', prop, 'because it is not defined');
+    console.log('Using default value for config property', prop, 'because it is not defined');
     ENV[prop] = SAMPLE_ENV[prop];
   }
 }
 
 function finalCharIsNotSlash(str: string): boolean {
-  return !str || str.charAt(str.length - 1) != '/';
+  return !str || str.charAt(str.length - 1) !== '/';
 }
 
 if (finalCharIsNotSlash(ENV.socketUrl)) {

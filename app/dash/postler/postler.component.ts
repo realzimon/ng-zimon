@@ -18,7 +18,7 @@ export class PostlerComponent {
     postlerService.onStateChange().subscribe((data: PostlerData) => {
       this.stateInfo = data;
       this.error = false;
-      console.info('Received post change', data);
+      console.log('Received post change', data);
     });
     this.loadPostState();
   }
@@ -29,7 +29,7 @@ export class PostlerComponent {
         this.submitAction('accepted');
       } else if (event.keyCode === 78) { // 'n'ext
         this.submitAction('next');
-      } else if (event.keyCode === 75) { //'k'ancel (German: 'k'eine Post)
+      } else if (event.keyCode === 75) { // 'k'ancel (German: 'k'eine Post)
         this.submitAction('cancel');
       }
     } else if (this.stateInfo.state === PostState.Reminder && event.keyCode === 72) { // 'h'ave returned

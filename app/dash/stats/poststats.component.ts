@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Zivi, ZiviService} from '../../services/zivi.service';
-import {PostlerService} from "../../services/postler.service";
+import {PostlerService} from '../../services/postler.service';
 import {Chart} from 'chart.js';
 
 @Component({
@@ -40,7 +40,7 @@ export class PostStats implements OnInit {
   private chartProperties = {
     type: 'bar',
     data: {
-      labels: ["Post"],
+      labels: ['Post'],
       datasets: Array()
     },
     options: this.chartOptions

@@ -1,7 +1,7 @@
-import {Component, NgZone} from '@angular/core';
+import {Component} from '@angular/core';
 import {Zivi, ZiviService} from '../../services/zivi.service';
-import {TimerService} from "../../services/timer.service";
-import {toast} from "angular2-materialize";
+import {TimerService} from '../../services/timer.service';
+import {toast} from 'angular2-materialize';
 import {SettingsService} from '../../services/settings.service';
 
 @Component({
@@ -18,20 +18,6 @@ export class ZiviListComponent {
   remainingSecs: number = 0;
   loadFlag: boolean = false;
 
-  constructor(private ziviService: ZiviService, private timerService: TimerService, private settingsService: SettingsService) {
-    this.loadZivis();
-    timerService.getTimerUpdates().subscribe((data: any) => {
-      if (this.loadFlag) {
-        this.loadZivis(() => this.loadFlag = false);
-      } else if (data.remaining === 0) {
-        this.loadFlag = true;
-      }
-      this.remainingMins = ~~(data.remaining / 60);
-      this.remainingSecs = data.remaining % 60;
-    });
-    ziviService.getZiviUpdates().subscribe(() => this.loadFlag = true);
-  }
-
   static numberFixedLen(value: number, len: number): string {
     if (isNaN(value) || isNaN(value)) {
       return '' + value;
@@ -41,6 +27,20 @@ export class ZiviListComponent {
       num = '0' + num;
     }
     return num;
+  }
+
+  constructor(private ziviService: ZiviService, private timerService: TimerService, private settingsService: SettingsService) {
+    this.loadZivis();
+    timerService.getTimerUpdates().subscribe((data: any) => {
+      if (this.loadFlag) {
+        this.loadZivis(() => this.loadFlag = false);
+      } else if (data.remaining === 0) {
+        this.loadFlag = true;
+      }
+      this.remainingMins = Math.round(data.remaining / 60);
+      this.remainingSecs = data.remaining % 60;
+    });
+    ziviService.getZiviUpdates().subscribe(() => this.loadFlag = true);
   }
 
   loadZivis(callback?: (zivis: Zivi[]) => void) {
@@ -54,7 +54,9 @@ export class ZiviListComponent {
           zivis.splice(7);
         }
         this.zivis = zivis;
-        callback && callback(zivis);
+        if (callback) {
+          callback(zivis);
+        }
       });
   }
 
@@ -66,7 +68,7 @@ export class ZiviListComponent {
         let temp = zivi.name;
         zivi.name = zivi.name_mx;
         zivi.name_mx = temp;
-      })
+      });
     }
   }
 }
