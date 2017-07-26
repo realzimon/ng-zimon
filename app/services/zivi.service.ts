@@ -58,7 +58,8 @@ export class ZiviService {
   private listUrl = ENV.backendUrl + 'api/v1/zivis';
   private createUrl = ENV.backendUrl + 'api/v1/zivis/create';
   private updateUrl = ENV.backendUrl + 'api/v1/zivis/update';
-  private ziviUpdates = new Subject();
+  private deleteUrl = ENV.backendUrl + 'api/v1/zivis/delete';
+  private ziviUpdates = new Subject<string>();
 
   static createPictureUrl(url: string) {
     return ENV.backendUrl + 'images/' + url;
@@ -67,7 +68,7 @@ export class ZiviService {
   constructor(private http: Http) {
   }
 
-  getZiviUpdates(): Subject<{}> {
+  getZiviUpdates(): Subject<string> {
     return this.ziviUpdates;
   }
 
@@ -82,23 +83,38 @@ export class ZiviService {
   createNewZivi(spec: Zivi): Observable<Zivi> {
     return this.http.post(this.createUrl, {spec: spec})
       .map(res => res.json())
-      .flatMap(res => this.dtoToObservable(res));
+      .flatMap(res => this.dtoToObservableAndPushUpdate(res, 'create'));
   }
 
   updateZivi(name: string, spec: Zivi): Observable<Zivi> {
     return this.http.post(this.updateUrl, {name: name, spec: spec})
       .map(res => res.json())
-      .flatMap(res => this.dtoToObservable(res));
+      .flatMap(res => this.dtoToObservableAndPushUpdate(res, 'update'));
   }
 
-  private dtoToObservable(res: any): Observable<Zivi> {
+  private dtoToObservableAndPushUpdate(res: any, action: string): Observable<Zivi> {
     return new Observable(subscriber => {
       if (!res || res.error || !res.zivi) {
         subscriber.error(res.error || 'unknown error');
       } else {
         subscriber.next(Zivi.fromDTO(res.zivi));
-        this.ziviUpdates.next();
+        this.ziviUpdates.next(action);
       }
     });
+  }
+
+  deleteZivi(name: string): Observable<{}> {
+    return this.http.post(this.deleteUrl, {name: name})
+      .map(res => res.json())
+      .flatMap(res => {
+        return new Observable(subscriber => {
+          if (!res || res.error) {
+            subscriber.error(res.error || 'unknown error');
+          } else {
+            subscriber.next({});
+            this.ziviUpdates.next('delete');
+          }
+        });
+      });
   }
 }

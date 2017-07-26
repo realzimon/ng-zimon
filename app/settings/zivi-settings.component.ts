@@ -96,6 +96,19 @@ export class ZiviSettingsComponent implements OnInit {
     this.zivi = this.originalZivi;
   }
 
+  deleteZivi() {
+    this.loading = true;
+    console.log(' ### Deleting Zivi', this.zivi);
+    this.ziviService.deleteZivi(this.zivi.name)
+      .subscribe(
+        () => toast('Zivi ' + this.zivi.name + ' gelöscht.', 4000),
+        error => {
+          toast('Fehler beim Löschen.', 4000);
+          console.error('Fehler beim Löschen von', this.zivi, error);
+        }, () => this.loading = false
+      );
+  }
+
   // noinspection JSMethodCanBeStatic
   trackByIndex(index: number) {
     return index;

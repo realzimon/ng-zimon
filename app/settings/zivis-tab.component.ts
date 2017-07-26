@@ -14,6 +14,16 @@ export class ZivisTabComponent {
   }
 
   loadZivis() {
+    this.retrieveZivis();
+    this.ziviService.getZiviUpdates().subscribe(action => {
+      if (action === 'delete') {
+        console.log(' --- Updated zivi list in settings');
+        this.retrieveZivis();
+      }
+    });
+  }
+
+  private retrieveZivis() {
     this.ziviService.getAllZivis()
       .subscribe(zivis => {
         this.zivis = zivis;
