@@ -40,5 +40,10 @@ export class ZivisTabComponent {
     );
     zivi.create = true;
     this.zivis.push(zivi);
+    // Scroll to the bottom of the tab to present the new element:
+    let $tab = $('.modal-content');
+    $tab.animate({
+      scrollTop: $tab[0].scrollHeight
+    }, 1000);
   }
 }

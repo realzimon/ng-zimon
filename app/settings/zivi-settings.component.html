@@ -55,7 +55,7 @@
   <div class="card-action white">
     <a class="green-text text-darken-2" (click)="updateZivi()" *ngIf="!zivi.create && editing">Speichern</a>
     <a class="green-text text-darken-2" (click)="createZivi()" *ngIf="zivi.create && editing">Erstellen</a>
-    <a class="red-text text-darken-3" (click)="deleteZivi()" *ngIf="editing">Löschen</a>
+    <a class="red-text text-darken-3" (click)="deleteZivi()" *ngIf="editing && !zivi.create">Löschen</a>
     <a class="grey-text" (click)="cancelEditing()" *ngIf="editing">Abbrechen</a>
     <a class="grey-text" (click)="startEditing()" *ngIf="!editing">Bearbeiten</a>
   </div>

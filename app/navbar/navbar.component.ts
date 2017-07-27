@@ -31,7 +31,7 @@ export class NavComponent {
 
   loadNewQuote() {
     this.quoteService.getRandomQuote()
-      .subscribe(res => this.randomQuote = res.quote.text);
+      .subscribe(quote => this.randomQuote = quote.text);
   }
 
   handleKeyboardEvent(event: KeyboardEvent) {

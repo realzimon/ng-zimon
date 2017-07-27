@@ -8,7 +8,7 @@ import {DomSanitizer} from '@angular/platform-browser';
   templateUrl: 'app/settings/zivi-settings.component.html',
   inputs: ['zivi', 'index'],
   host: {
-    'class': 'col-xs-6'
+    'class': 'col-xs-6 edit-card'
   }
 })
 export class ZiviSettingsComponent implements OnInit {
@@ -81,8 +81,7 @@ export class ZiviSettingsComponent implements OnInit {
     this.ziviService.createNewZivi(this.zivi)
       .subscribe(
         updated => this.handleWriteSuccess(updated),
-        error => this.handleWriteError(error),
-        () => this.loading = false
+        error => this.handleWriteError(error)
       );
   }
 
@@ -93,7 +92,11 @@ export class ZiviSettingsComponent implements OnInit {
 
   cancelEditing() {
     this.editing = false;
-    this.zivi = this.originalZivi;
+    if (this.zivi.create) {
+      this.ziviService.getZiviUpdates().next('delete');
+    } else {
+      this.zivi = this.originalZivi;
+    }
   }
 
   deleteZivi() {
@@ -105,7 +108,7 @@ export class ZiviSettingsComponent implements OnInit {
         error => {
           toast('Fehler beim Löschen.', 4000);
           console.error('Fehler beim Löschen von', this.zivi, error);
-        }, () => this.loading = false
+        }
       );
   }
 

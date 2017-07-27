@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="card-panel teal lighten-2 white-text">
+    <h1>Zitate bearbeiten</h1>
+    <p class="flow-text">Diese Zitate werden oben in der Navigationsleiste angezeigt. Alle paar Sekunden wird
+    zuf&auml;llig ein neues Zitat ausgew&auml;hlt. Bitte darauf achten, dass die Zitate tatsächlich in der
+    Navigationsleiste Platz haben!</p>
+  </div>
+  <div class="card-panel red white-text" *ngIf="error">
+    <h1>Fehler beim Laden der Zitate</h1>
+    <p>{{error}}</p>
+  </div>
+  <div class="row">
+    <quoteedit *ngFor="let quote of quotes; let i = index;" [quote]="quote" [index]="i"></quoteedit>
+  </div>
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large green" (click)="addNewQuote()">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
+</div>

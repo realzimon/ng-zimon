@@ -75,7 +75,7 @@ nav .brand-logo.left {
 }
 
 .huge-icon {
-font-size: 10em;
+  font-size: 10em;
 }
 
 .flade-icon {
@@ -176,32 +176,38 @@ zivilist .war-heading {
   }
 }
 
-ziviedit .card-content .row {
+.edit-card .card-content .row {
   font-size: 120%;
 }
 
-ziviedit .card-title input {
+.edit-card .card-title input,
+.edit-card .card-title textarea {
   font-size: 120%;
 }
 
-ziviedit .card-content input {
+.edit-card .card-title,
+.edit-card .card-title textarea {
+  width: 100%;
+}
+
+.edit-card .card-content input {
   margin-bottom: 0.3rem;
   height: 2rem;
 }
 
-ziviedit a.btn-flat {
+.edit-card a.btn-flat {
   padding: 0;
 }
 
-ziviedit .icon-pulldown {
+.edit-card .icon-pulldown {
   padding-top: 0.3rem;
 }
 
-ziviedit .card-action a:hover {
+.edit-card .card-action a:hover {
   cursor: pointer;
 }
 
-zivis-tab .fixed-action-btn {
+.settings-modal .fixed-action-btn {
   bottom: 80px;
 }
 
