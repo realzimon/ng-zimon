@@ -275,15 +275,8 @@ feel-the-bern img {
 @keyframes machens-uns-bitte-auf {
   0% {
     background-color: red;
-    display: block;
-    content: "POLIZEI MACHENS UNS BITTE AUF";
   }
   99% {
     background-color: blue;
-    content: "POLIZEI MACHENS UNS BITTE AUF";
-  }
-  100% {
-    display: none;
-    content: "";
   }
 }
