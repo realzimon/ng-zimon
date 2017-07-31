@@ -31,7 +31,15 @@ export class NavComponent {
 
   loadNewQuote() {
     this.quoteService.getRandomQuote()
-      .subscribe(quote => this.randomQuote = quote.text);
+      .subscribe(quote => {
+        this.randomQuote = quote.text;
+        if(this.randomQuote === '%polizei%') {
+          this.randomQuote = 'POLIZEI LASSENS UNS BITTE REIN';
+          $('.polizei').addClass('pactive');
+        } else {
+          $('.polizei').removeClass('pactive');
+        }
+      });
   }
 
   handleKeyboardEvent(event: KeyboardEvent) {
