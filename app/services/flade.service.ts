@@ -8,6 +8,7 @@ import {Observable} from 'rxjs/Rx';
 import {ENV} from '../config/environment';
 import {SocketService} from './socket.service';
 import {Subscriber} from 'rxjs/Subscriber';
+import {URLS} from './urls';
 
 export class Flade {
   static fromDTO(dto: any) {
@@ -31,7 +32,7 @@ export class FladeResult {
 
 @Injectable()
 export class FladeService {
-  private apiUrl = ENV.backendUrl + 'api/v1/flade';
+  private apiUrl = URLS.backendPath('api/v1/flade');
   private fladeChangeObservable: Observable<FladeResult>;
 
   constructor(private http: Http, private socketService: SocketService) {

@@ -9,6 +9,7 @@ import 'rxjs/Rx';
 import {ENV} from '../config/environment';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
+import {URLS} from './urls';
 
 export class Zivi {
   public create: boolean;
@@ -55,14 +56,14 @@ export class Zivi {
 
 @Injectable()
 export class ZiviService {
-  private listUrl = ENV.backendUrl + 'api/v1/zivis';
-  private createUrl = ENV.backendUrl + 'api/v1/zivis/create';
-  private updateUrl = ENV.backendUrl + 'api/v1/zivis/update';
-  private deleteUrl = ENV.backendUrl + 'api/v1/zivis/delete';
+  private listUrl = URLS.backendPath('api/v1/zivis');
+  private createUrl = URLS.backendPath('api/v1/zivis/create');
+  private updateUrl = URLS.backendPath('api/v1/zivis/update');
+  private deleteUrl = URLS.backendPath('api/v1/zivis/delete');
   private ziviUpdates = new Subject<string>();
 
   static createPictureUrl(url: string) {
-    return ENV.backendUrl + 'images/' + url;
+    return URLS.backendPath('images/' + url);
   }
 
   constructor(private http: Http) {

@@ -2,13 +2,14 @@ import {Injectable, OnDestroy} from '@angular/core';
 import * as io from 'socket.io-client';
 import {ENV} from '../config/environment';
 import {toast} from 'angular2-materialize';
+import {URLS} from './urls';
 
 @Injectable()
 export class SocketService implements OnDestroy {
   private socket: SocketIOClient.Socket;
 
   constructor() {
-    this.socket = io.connect(ENV.socketUrl, {
+    this.socket = io.connect(URLS.socketUrl, {
       reconnectionDelay: 30000
     });
     this.socket.on('connect_error', function (err: any) {

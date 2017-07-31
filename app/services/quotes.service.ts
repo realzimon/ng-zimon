@@ -9,6 +9,7 @@ import 'rxjs/Rx';
 import {ENV} from '../config/environment';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
+import {URLS} from './urls';
 
 export class Quote {
   static fromDto(dto: any): Quote {
@@ -30,11 +31,11 @@ export class Quote {
 
 @Injectable()
 export class QuotesService {
-  private randomUrl = ENV.backendUrl + 'api/v1/quotes/random';
-  private createUrl = ENV.backendUrl + 'api/v1/quotes/create';
-  private getAllUrl = ENV.backendUrl + 'api/v1/quotes/';
-  private updateUrl = ENV.backendUrl + 'api/v1/quotes/update';
-  private deleteUrl = ENV.backendUrl + 'api/v1/quotes/delete';
+  private randomUrl = URLS.backendPath('api/v1/quotes/random');
+  private createUrl = URLS.backendPath('api/v1/quotes/create');
+  private getAllUrl = URLS.backendPath('api/v1/quotes/');
+  private updateUrl = URLS.backendPath('api/v1/quotes/update');
+  private deleteUrl = URLS.backendPath('api/v1/quotes/delete');
   private quoteUpdates = new Subject<string>();
 
   constructor(private http: Http) {

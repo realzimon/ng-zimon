@@ -9,6 +9,7 @@ import {Zivi} from './zivi.service';
 import {Observable} from 'rxjs/Rx';
 import {ENV} from '../config/environment';
 import {SocketService} from './socket.service';
+import {URLS} from './urls';
 
 export enum PostState {
   Idle,
@@ -33,7 +34,7 @@ export class PostlerData {
 
 @Injectable()
 export class PostlerService {
-  private apiUrl = ENV.backendUrl + 'api/v1/post';
+  private apiUrl = URLS.backendPath('api/v1/post');
   private stateChangeObservable: Observable<PostlerData>;
 
   constructor(private http: Http, private socketService: SocketService) {
