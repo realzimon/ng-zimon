@@ -46,6 +46,9 @@ export class NavComponent {
     // The lowercase letter 'q'
     if (event.keyCode === 81) {
       this.loadNewQuote();
+    } else if (event.keyCode === 80 && event.altKey) { // the lowercase letter 'p'
+      this.randomQuote = 'POLIZEI LASSENS UNS BITTE REIN';
+      $('.polizei').addClass('pactive');
     }
   }
 }
