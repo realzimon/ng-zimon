@@ -33,7 +33,7 @@ export class NavComponent {
     this.quoteService.getRandomQuote()
       .subscribe(quote => {
         this.randomQuote = quote.text;
-        if(this.randomQuote === '%polizei%') {
+        if (this.randomQuote === '%polizei%') {
           this.randomQuote = 'POLIZEI LASSENS UNS BITTE REIN';
           $('.polizei').addClass('pactive');
         } else {
