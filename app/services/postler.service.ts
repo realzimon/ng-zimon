@@ -7,7 +7,6 @@ import {Injectable} from '@angular/core';
 import {Zivi} from './zivi.service';
 
 import {Observable} from 'rxjs/Rx';
-import {ENV} from '../config/environment';
 import {SocketService} from './socket.service';
 import {URLS} from './urls';
 

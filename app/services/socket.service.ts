@@ -1,6 +1,5 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import * as io from 'socket.io-client';
-import {ENV} from '../config/environment';
 import {toast} from 'angular2-materialize';
 import {URLS} from './urls';
 
@@ -13,7 +12,7 @@ export class SocketService implements OnDestroy {
       reconnectionDelay: 30000
     });
     this.socket.on('connect_error', function (err: any) {
-      console.error('Unable to connect to', ENV.socketUrl, 'because:', err);
+      console.error('Unable to connect to', URLS.socketUrl, 'because:', err);
       toast('Unable to connect to backend socket', 2000);
     });
   }

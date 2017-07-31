@@ -6,7 +6,6 @@ import {Http} from '@angular/http';
 import {Injectable} from '@angular/core';
 
 import 'rxjs/Rx';
-import {ENV} from '../config/environment';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {URLS} from './urls';

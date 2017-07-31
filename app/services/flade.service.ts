@@ -5,7 +5,6 @@
 import {Http} from '@angular/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
-import {ENV} from '../config/environment';
 import {SocketService} from './socket.service';
 import {Subscriber} from 'rxjs/Subscriber';
 import {URLS} from './urls';
