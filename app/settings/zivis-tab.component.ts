@@ -37,7 +37,7 @@ export class ZivisTabComponent {
   }
 
   addNewZivi() {
-    let color:string;
+    let color: string;
     this.colorService.getRandomColor().subscribe(randcolor => color = randcolor);
 
     let zivi = new Zivi(
