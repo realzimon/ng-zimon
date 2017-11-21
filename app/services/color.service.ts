@@ -21,5 +21,16 @@ export class ColorService {
     return of(colorPalette[randomIndex]);
   }
 
+  convertColorToHex(color: string): Observable<string> {
+    
+    let hex: string = null;
+
+    colorPalette.forEach(element => {
+      if (element.color === color) { hex = element.hex; }
+    });
+    
+    return of(hex);
+  }
+
 
 }

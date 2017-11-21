@@ -32,6 +32,16 @@ export class ZiviSettingsComponent implements OnInit {
     if (!this.checkZiviForSaving()) {
       return;
     }
+    let ziviHex: string;
+    this.colorService.convertColorToHex(this.zivi.color).subscribe(hex => ziviHex = hex);
+    if (ziviHex === null) {
+      this.zivi.color = 'black';
+      this.zivi.colorHex = '#000000';
+    } else {
+      this.zivi.colorHex = ziviHex;
+    }
+
+
     // TODO: Check for duplicate names
     this.ziviService.updateZivi(this.originalZivi.name, this.zivi)
       .subscribe(
