@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Zivi, ZiviService} from '../services/zivi.service';
 import { ColorService } from '../services/color.service';
+import { ColorPair } from '../classes/colorPair';
 
 
 @Component({
@@ -37,11 +38,11 @@ export class ZivisTabComponent {
   }
 
   addNewZivi() {
-    let color: string;
+    let color: ColorPair;
     this.colorService.getRandomColor().subscribe(randcolor => color = randcolor);
 
     let zivi = new Zivi(
-      '', '', 0, color, '#ffc107', '', 0, []
+      '', '', 0, color.color, color.hex, '', 0, []
     );
     zivi.create = true;
     this.zivis.push(zivi);

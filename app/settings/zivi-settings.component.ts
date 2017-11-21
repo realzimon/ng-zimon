@@ -3,6 +3,7 @@ import {Zivi, ZiviService} from '../services/zivi.service';
 import {toast} from 'angular2-materialize';
 import {DomSanitizer} from '@angular/platform-browser';
 import { ColorService } from '../services/color.service';
+import { ColorPair } from '../classes/colorPair';
 
 @Component({
   selector: 'ziviedit',
@@ -128,6 +129,9 @@ export class ZiviSettingsComponent implements OnInit {
   }
 
   getRandomColor(): void {
-    this.colorService.getRandomColor().subscribe(color => this.zivi.color = color);
+    let color: ColorPair;
+    this.colorService.getRandomColor().subscribe(rancolor => color = rancolor);
+    this.zivi.color = color.color;
+    this.zivi.colorHex = color.hex;
   }
 }
