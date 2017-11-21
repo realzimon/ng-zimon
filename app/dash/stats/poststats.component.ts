@@ -89,7 +89,7 @@ export class PostStats implements OnInit {
       return {
         data: [zivi.post_count],
         label: zivi.name,
-        backgroundColor: zivi.color,
+        backgroundColor: zivi.colorHex,
         fontColor: '#ffffff'
       };
     });

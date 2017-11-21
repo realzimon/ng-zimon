@@ -13,7 +13,7 @@
         <b class="col-xs-5">
           Farbe: (<a href="http://materializecss.com/color.html" class="grey-text">Legende</a>)
         </b>
-        <div class="col-xs-7" *ngIf="!editing">{{ zivi.color }}</div>
+        <div class="col-xs-7" *ngIf="!editing">{{ zivi.color }} ({{ zivi.colorHex }})</div>
         <div class="col-xs-7 color-editing">
           <input class="" *ngIf="editing" [(ngModel)]="zivi.color" name="color" type="text">
           <button class="fa fa-random" *ngIf="editing" (click)="getRandomColor()"></button>

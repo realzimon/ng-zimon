@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
+import {ColorPair, colorPalette} from '../classes/colorPair';
 
 @Injectable()
 export class ColorService {
@@ -10,17 +11,14 @@ export class ColorService {
   constructor() {
   }
 
-  getRandomColor(): Observable<string> {
+  getRandomColor(): Observable<ColorPair> {
 
-    let colors: string[] = ['red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan',
-     'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'brown', 'grey', 'blue-grey'];
-
-    let randomIndex: number = Math.floor(Math.random() * colors.length);
-    if (randomIndex >= colors.length) {
+    let randomIndex: number = Math.floor(Math.random() * colorPalette.length);
+    if (randomIndex >= colorPalette.length) {
       randomIndex = 0;
     }
 
-    return of(colors[randomIndex]);
+    return of(colorPalette[randomIndex]);
   }
 
 
