@@ -15,6 +15,7 @@ import {MaterializeModule} from 'angular2-materialize';
 import {SocketService} from './services/socket.service';
 import {SettingsModule} from './settings/settings.module';
 import {SettingsService} from './services/settings.service';
+import {ColorService} from './services/color.service';
 import {FormsModule} from '@angular/forms';
 
 @NgModule({
@@ -26,7 +27,7 @@ import {FormsModule} from '@angular/forms';
   bootstrap: [AppComponent],
   providers: [
     QuotesService, ZiviService, TimerService, PostlerService,
-    FladeService, NetUsageService, SocketService, SettingsService
+    FladeService, NetUsageService, SocketService, SettingsService, ColorService
   ]
 })
 export class AppModule {

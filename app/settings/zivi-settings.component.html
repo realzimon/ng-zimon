@@ -16,7 +16,7 @@
         <div class="col-xs-7" *ngIf="!editing">{{ zivi.color }}</div>
         <div class="col-xs-7 color-editing">
           <input class="" *ngIf="editing" [(ngModel)]="zivi.color" name="color" type="text">
-          <button class="fa fa-random" *ngIf="editing"></button>
+          <button class="fa fa-random" *ngIf="editing" (click)="getRandomColor()"></button>
         </div>
       </div>
       <div class="row">

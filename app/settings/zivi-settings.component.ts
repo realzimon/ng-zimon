@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Zivi, ZiviService} from '../services/zivi.service';
 import {toast} from 'angular2-materialize';
 import {DomSanitizer} from '@angular/platform-browser';
+import { ColorService } from '../services/color.service';
 
 @Component({
   selector: 'ziviedit',
@@ -19,7 +20,7 @@ export class ZiviSettingsComponent implements OnInit {
   error: any;
   editing = false;
 
-  constructor(private ziviService: ZiviService, private sanitizer: DomSanitizer) {
+  constructor(private ziviService: ZiviService, private colorService: ColorService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -124,5 +125,9 @@ export class ZiviSettingsComponent implements OnInit {
     } else {
       return this.sanitizer.bypassSecurityTrustStyle('background-color: ' + this.zivi.colorHex);
     }
+  }
+
+  getRandomColor(): void {
+    this.colorService.getRandomColor().subscribe(color => this.zivi.color = color);
   }
 }
