@@ -17,7 +17,7 @@ import {SettingsModule} from './settings/settings.module';
 import {SettingsService} from './services/settings.service';
 import {ColorService} from './services/color.service';
 import {FormsModule} from '@angular/forms';
-import { PoststatsService } from './services/poststats.service';
+import {PoststatsService} from './services/poststats.service';
 
 @NgModule({
   imports: [
