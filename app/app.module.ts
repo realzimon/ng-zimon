@@ -17,6 +17,7 @@ import {SettingsModule} from './settings/settings.module';
 import {SettingsService} from './services/settings.service';
 import {ColorService} from './services/color.service';
 import {FormsModule} from '@angular/forms';
+import { PoststatsService } from './services/poststats.service';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import {FormsModule} from '@angular/forms';
   bootstrap: [AppComponent],
   providers: [
     QuotesService, ZiviService, TimerService, PostlerService,
-    FladeService, NetUsageService, SocketService, SettingsService, ColorService
+    FladeService, NetUsageService, SocketService, SettingsService,
+    ColorService, PoststatsService
   ]
 })
 export class AppModule {

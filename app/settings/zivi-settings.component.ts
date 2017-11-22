@@ -4,6 +4,7 @@ import {toast} from 'angular2-materialize';
 import {DomSanitizer} from '@angular/platform-browser';
 import { ColorService } from '../services/color.service';
 import { ColorPair } from '../classes/colorPair';
+import {PoststatsService} from '../services/poststats.service';
 
 @Component({
   selector: 'ziviedit',
@@ -21,7 +22,8 @@ export class ZiviSettingsComponent implements OnInit {
   error: any;
   editing = false;
 
-  constructor(private ziviService: ZiviService, private colorService: ColorService, private sanitizer: DomSanitizer) {
+  constructor(private ziviService: ZiviService, private colorService: ColorService,
+    private sanitizer: DomSanitizer, private poststatsService: PoststatsService) {
   }
 
   ngOnInit() {
@@ -57,6 +59,8 @@ export class ZiviSettingsComponent implements OnInit {
     this.error = false;
     this.editing = false;
     this.loading = false;
+    this.poststatsService.loadGraphData();
+    this.poststatsService.updateGraph();
   }
 
   handleWriteError(error: any) {
