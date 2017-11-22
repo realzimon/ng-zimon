@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Zivi, ZiviService} from '../services/zivi.service';
 import {toast} from 'angular2-materialize';
 import {DomSanitizer} from '@angular/platform-browser';
-import { ColorService } from '../services/color.service';
-import { ColorPair } from '../classes/colorPair';
+import {ColorService} from '../services/color.service';
+import {ColorPair} from '../classes/colorPair';
 import {PoststatsService} from '../services/poststats.service';
 
 @Component({
