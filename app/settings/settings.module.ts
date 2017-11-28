@@ -8,13 +8,12 @@ import {ZivisTabComponent} from './zivis-tab.component';
 import {FormsModule} from '@angular/forms';
 import {QuotesTabComponent} from './quotes-tab.component';
 import {QuoteEditComponent} from './quote-edit.component';
-import {ColorpickerComponent} from './colorpicker.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, MaterializeModule],
   declarations: [
     SettingsModalComponent, HomeTabComponent, ZivisTabComponent, ZiviSettingsComponent,
-    QuotesTabComponent, QuoteEditComponent, ColorpickerComponent
+    QuotesTabComponent, QuoteEditComponent
   ],
   exports: [SettingsModalComponent],
   providers: []

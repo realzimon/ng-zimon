@@ -1,78 +1,78 @@
 <div [class]="(zivi.color || 'blue-grey darken-1') + ' card'" *ngIf="!loading">
-    <div class="card-content white-text">
-        <div class="card-panel red" *ngIf="error">
-            Fehler: {{error | json}}
+  <div class="card-content white-text">
+    <div class="card-panel red" *ngIf="error">
+      Fehler: {{error | json}}
+    </div>
+    <form #ziviForm="ngForm">
+      <div class="card-title">
+        <span *ngIf="!editing">{{ zivi.name }}</span>
+        <input *ngIf="editing" [(ngModel)]="zivi.name" placeholder="Eindeutiger Name" name="name" type="text"
+               data-length="16">
+      </div>
+      <div class="row">
+        <b class="col-xs-5">
+          Farbe: (<a href="http://materializecss.com/color.html" class="grey-text">Legende</a>)
+        </b>
+        <div class="col-xs-7" *ngIf="!editing">{{ zivi.color }} ({{ zivi.colorHex }})</div>
+        <div class="col-xs-7 color-editing">
+          <input class="" *ngIf="editing" [(ngModel)]="zivi.color" name="color" type="text">
+          <button class="fa fa-random" *ngIf="editing" (click)="getRandomColor()"></button>
         </div>
-        <form #ziviForm="ngForm">
-            <div class="card-title">
-                <span *ngIf="!editing">{{ zivi.name }}</span>
-                <input *ngIf="editing" [(ngModel)]="zivi.name" placeholder="Eindeutiger Name" name="name" type="text" data-length="16">
-            </div>
-            <div class="row">
-                <b class="col-xs-5">
-                    Farbe: (<a href="http://materializecss.com/color.html" class="grey-text">Legende</a>)
-                </b>
-                <div class="col-xs-7" *ngIf="!editing">{{ zivi.color }} ({{ zivi.colorHex }})</div>
-                <div class="col-xs-7 color-editing" *ngIf="editing">
-                    <colorpicker [(value)]="zivi.color"></colorpicker>
-                    <!-- input class="" *ngIf="editing" [(ngModel)]="zivi.color" name="color" type="text" -->
-                    <button class="fa fa-random" (click)="getRandomColor()"></button>
-                </div>
-            </div>
-            <div class="row">
-                <b class="col-xs-5">Mexikanischer Name:</b>
-                <div class="col-xs-7" *ngIf="!editing">{{ zivi.name_mx }}</div>
-                <input class="col-xs-7" *ngIf="editing" [(ngModel)]="zivi.name_mx" name="name_mx" type="text">
-            </div>
-            <div class="row">
-                <b class="col-xs-5">
-                    Bild: (<a title="Relativ zu /public/images/ im Backzimon, oder beginnend mit http:// oder https:// für Bilder
-                    aus dem Internet - Sollte quadratisch sein" class="grey-text">Info</a>)
-                </b>
-                <div class="col-xs-7" *ngIf="!editing">{{ zivi.getFullPictureUrl() }}</div>
-                <input class="col-xs-7" *ngIf="editing" [(ngModel)]="zivi.picture" name="picture" type="text">
-            </div>
-            <div class="row">
-                <b class="col-xs-5">
-                    MAC-Adressen:
-                    <a class="btn-flat" (click)="zivi.addresses.push('')" *ngIf="editing">
-                        <i class="material-icons">add</i>
-                    </a>
-                </b>
-                <div class="col-xs-7" *ngIf="!editing">
-                    <div *ngFor="let address of zivi.addresses">
-                        {{ address }}
-                    </div>
-                </div>
-                <div class="col-xs-7" *ngIf="editing">
-                    <div *ngFor="let _ of zivi.addresses; trackBy:trackByIndex; let i = index" class="row">
-                        <input [(ngModel)]="zivi.addresses[i]" type="text" [name]="'addresses' + i" class="col-xs-11">
-                        <a class="btn-flat col-xs-1 material-icons icon-pulldown" (click)="zivi.addresses.splice(i, 1)">remove</a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="card-action white">
-        <a class="green-text text-darken-2" (click)="updateZivi()" *ngIf="!zivi.create && editing">Speichern</a>
-        <a class="green-text text-darken-2" (click)="createZivi()" *ngIf="zivi.create && editing">Erstellen</a>
-        <a class="red-text text-darken-3" (click)="deleteZivi()" *ngIf="editing && !zivi.create">Löschen</a>
-        <a class="grey-text" (click)="cancelEditing()" *ngIf="editing">Abbrechen</a>
-        <a class="grey-text" (click)="startEditing()" *ngIf="!editing">Bearbeiten</a>
-    </div>
+      </div>
+      <div class="row">
+        <b class="col-xs-5">Mexikanischer Name:</b>
+        <div class="col-xs-7" *ngIf="!editing">{{ zivi.name_mx }}</div>
+        <input class="col-xs-7" *ngIf="editing" [(ngModel)]="zivi.name_mx" name="name_mx" type="text">
+      </div>
+      <div class="row">
+        <b class="col-xs-5">
+          Bild: (<a title="Relativ zu /public/images/ im Backzimon, oder beginnend mit http:// oder https:// für Bilder
+           aus dem Internet - Sollte quadratisch sein" class="grey-text">Info</a>)
+        </b>
+        <div class="col-xs-7" *ngIf="!editing">{{ zivi.getFullPictureUrl() }}</div>
+        <input class="col-xs-7" *ngIf="editing" [(ngModel)]="zivi.picture" name="picture" type="text">
+      </div>
+      <div class="row">
+        <b class="col-xs-5">
+          MAC-Adressen:
+          <a class="btn-flat" (click)="zivi.addresses.push('')" *ngIf="editing">
+            <i class="material-icons">add</i>
+          </a>
+        </b>
+        <div class="col-xs-7" *ngIf="!editing">
+          <div *ngFor="let address of zivi.addresses">
+            {{ address }}
+          </div>
+        </div>
+        <div class="col-xs-7" *ngIf="editing">
+          <div *ngFor="let _ of zivi.addresses; trackBy:trackByIndex; let i = index" class="row">
+            <input [(ngModel)]="zivi.addresses[i]" type="text" [name]="'addresses' + i" class="col-xs-11">
+            <a class="btn-flat col-xs-1 material-icons icon-pulldown" (click)="zivi.addresses.splice(i, 1)">remove</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-action white">
+    <a class="green-text text-darken-2" (click)="updateZivi()" *ngIf="!zivi.create && editing">Speichern</a>
+    <a class="green-text text-darken-2" (click)="createZivi()" *ngIf="zivi.create && editing">Erstellen</a>
+    <a class="red-text text-darken-3" (click)="deleteZivi()" *ngIf="editing && !zivi.create">Löschen</a>
+    <a class="grey-text" (click)="cancelEditing()" *ngIf="editing">Abbrechen</a>
+    <a class="grey-text" (click)="startEditing()" *ngIf="!editing">Bearbeiten</a>
+  </div>
 </div>
 <div class="card blue-grey darken-1 center-align" *ngIf="loading">
-    <div class="preloader-wrapper big active">
-        <div class="spinner-layer spinner-blue-only">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div>
-            <div class="gap-patch">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-        </div>
+  <div class="preloader-wrapper big active">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div>
+      <div class="gap-patch">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
     </div>
+  </div>
 </div>

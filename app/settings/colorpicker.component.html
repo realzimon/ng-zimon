@@ -1,9 +1,0 @@
-<div id="colorpicker-picked-color" (click)="togglePicker($event)">
-    <div class="color-display small"></div>
-    <p></p>
-</div>
-<ul id="colorpicker-list" style="display: none;">
-    <li *ngFor="let color of colorPalette" attr.value="{{color.color}}" (click)="selectColor($event)" title="{{color.color}}">
-        <div class="color-display medium hover {{color.color}}"></div>
-    </li>
-</ul>

@@ -240,8 +240,7 @@ pre#loaderror-pre {
   font-size: 120%;
 }
 
-#settings-zivis ziviedit .color-editing input,
-#settings-zivis ziviedit .color-editing colorpicker {
+#settings-zivis ziviedit .color-editing input {
   display: inline-block;
   width: calc(100% - 35px);
 }

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {Zivi, ZiviService} from '../../services/zivi.service';
 import {PostlerService} from '../../services/postler.service';
+import {Chart} from 'chart.js';
 import { PoststatsService } from '../../services/poststats.service';
 
 @Component({

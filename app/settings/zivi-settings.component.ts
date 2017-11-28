@@ -104,7 +104,6 @@ export class ZiviSettingsComponent implements OnInit {
   startEditing() {
     this.originalZivi = this.zivi.clone();
     this.editing = true;
-    console.log(this.zivi.color);
   }
 
   cancelEditing() {
