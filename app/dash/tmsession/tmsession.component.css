@@ -1,0 +1,17 @@
+#map-info {
+    border-right: solid white 1px;
+    width: 35%;
+}
+
+.map-info-table td {
+    background-color: white;
+    color: black;
+    font-size: 25px;
+    padding: 0;
+    margin-right: 15px;
+    text-align: center;
+}
+
+.card-content h4{
+    margin-top: 0;
+}

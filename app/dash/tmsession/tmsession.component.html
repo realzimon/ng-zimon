@@ -1,0 +1,30 @@
+<div class="card green white-text">
+  
+  <div class="card-title center-align">
+    <h5 style="padding-top: 10px;">Trackmania Live: {{serverName}}</h5>
+  </div>
+
+  <div class="card-content" style="padding-top: 5px;" *ngIf="gameInProgress">
+    <div class="row">
+    <div class="" style="padding-right: 20px;" id="map-info">
+      <h4>Track: {{track}}</h4>
+      <h4>Rekorde:</h4>
+      
+    </div>
+    <div class="" style="padding-left: 20px; width: 60%;">
+      <h5 style="margin-top: 0;">Live Zeiten:</h5>
+      <table class="map-info-table">
+        <tr *ngFor="let player of data">
+          <td>{{player.Rank}}</td><td>{{player.NickName}}</td><td>{{player.BestTime / 1000}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  </div>
+
+  <div class="card-content valign-wrapper full-height" *ngIf="!gameInProgress">
+    <div class="valign center-align full-width">
+      <h3>Kein live-Rennen gefunden.</h3>
+    </div>
+  </div>
+</div>
