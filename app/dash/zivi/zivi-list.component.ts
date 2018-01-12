@@ -37,7 +37,7 @@ export class ZiviListComponent {
       } else if (data.remaining === 0) {
         this.loadFlag = true;
       }
-      this.remainingMins = Math.round(data.remaining / 60);
+      this.remainingMins = Math.floor(data.remaining / 60);
       this.remainingSecs = data.remaining % 60;
     });
     ziviService.getZiviUpdates().subscribe(() => this.loadFlag = true);

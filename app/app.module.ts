@@ -18,6 +18,7 @@ import {SettingsService} from './services/settings.service';
 import {ColorService} from './services/color.service';
 import {FormsModule} from '@angular/forms';
 import {PoststatsService} from './services/poststats.service';
+import {TmService} from './services/tm.service';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import {PoststatsService} from './services/poststats.service';
   providers: [
     QuotesService, ZiviService, TimerService, PostlerService,
     FladeService, NetUsageService, SocketService, SettingsService,
-    ColorService, PoststatsService
+    ColorService, PoststatsService, TmService
   ]
 })
 export class AppModule {
