@@ -20,7 +20,7 @@ export class TmsessionComponent implements OnInit{
 
   constructor(private tmservice: TmService) {
     this.gameInProgress = true;
-    this.track = 'Lul';
+    this.track = '';
     this.data = {};
   }
 

@@ -9,18 +9,19 @@ import {FladeComponent} from './flade/flade.component';
 import {BernieComponent} from './bernie/bernie.component';
 import {NetUsageComponent} from './stats/netusage.component';
 import {TmsessionComponent} from './tmsession/tmsession.component';
+import {TmstatsComponent} from './tmstats/tmstats.component';
 
 @NgModule({
   imports: [BrowserModule],
   declarations: [
     ZiviListComponent, ZiviCardComponent, NumberFixedLen,
     PostlerComponent, PostStats, FladeComponent, BernieComponent, NetUsageComponent,
-    TmsessionComponent
+    TmsessionComponent, TmstatsComponent
   ],
   exports: [
     ZiviListComponent, PostlerComponent, PostStats,
     FladeComponent, BernieComponent, NetUsageComponent,
-    TmsessionComponent
+    TmsessionComponent, TmstatsComponent
   ],
   providers: []
 })
