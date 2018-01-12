@@ -16,20 +16,20 @@ export class TmService implements OnInit {
 
   constructor(private http: Http) {
     Observable.interval(2000)
-    .switchMap(() => http.get('http://192.168.1.104:8000/GetServerName')).map((data) => data.json())
+    .switchMap(() => http.get('http://localhost:8000/GetServerName')).map((data) => data.json())
     .subscribe((data) => {
       this.serverName = data;
     });
 
     Observable.interval(2000)
-    .switchMap(() => http.get('http://192.168.1.104:8000/GetCurrentRanking')).map((data) => data.json())
+    .switchMap(() => http.get('http://localhost:8000/GetCurrentRanking')).map((data) => data.json())
     .subscribe((data) => {
       this.times = data;
       console.log(data);
     });
 
     Observable.interval(2000)
-    .switchMap(() => http.get('http://192.168.1.104:8000/GetCurrentChallengeInfo')).map((data) => data.json())
+    .switchMap(() => http.get('http://localhost:8000/GetCurrentChallengeInfo')).map((data) => data.json())
     .subscribe((data) => {
       this.track = data["Name"];
       console.log(this.track);
