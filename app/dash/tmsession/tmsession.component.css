@@ -1,6 +1,7 @@
 #map-info {
     border-right: solid white 1px;
-    width: 35%;
+    width: 40%;
+    height: 100%;
 }
 
 .map-info-table td {
